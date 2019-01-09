@@ -1,0 +1,13 @@
+name: idea_nwea_map
+title: idea_nwea_map
+username: chrishaid
+account: chrishaid
+server: idea2.kippchicago.org
+hostUrl: https://idea2.kippchicago.org/__api__
+appId: 18
+bundleId: 70
+url: https://idea2.kippchicago.org/content/18/
+when: 1545253019.02362
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .httr-oauth|.Rprofile

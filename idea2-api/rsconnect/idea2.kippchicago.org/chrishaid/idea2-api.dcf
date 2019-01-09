@@ -1,0 +1,13 @@
+name: idea2-api
+title: idea2-api
+username: chrishaid
+account: chrishaid
+server: idea2.kippchicago.org
+hostUrl: https://idea2.kippchicago.org/__api__
+appId: 21
+bundleId: 76
+url: https://idea2.kippchicago.org/idea2-api/
+when: 1546826565.95947
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .httr-oauth|.Rprofile

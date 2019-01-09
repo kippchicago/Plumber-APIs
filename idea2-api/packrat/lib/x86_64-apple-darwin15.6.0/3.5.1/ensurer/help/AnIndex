@@ -1,0 +1,9 @@
+ensurer-package	ensurer
+check	ensures_that
+check_that	ensures_that
+ensure	ensures_that
+ensurer	ensurer
+ensures	ensures_that
+ensures_that	ensures_that
+ensure_that	ensures_that
+print.ensurer	print.ensurer

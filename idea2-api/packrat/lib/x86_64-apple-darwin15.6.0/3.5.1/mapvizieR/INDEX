@@ -1,0 +1,292 @@
+abbrev                  Create vector of Initials
+act_df                  ACT linking data frame
+add_accelerated_growth
+                        Add an accelerated growth object, including
+                        projections and simulations, to a mapvizieR
+                        object
+adhoc_psuedo_quartile   ad-hoc psuedo quartile
+alt_cohort_cgp_hist_plot
+                        Shows a cohort's progress over time.  Similar
+                        to cohort_cgp_hist, but uses the 2015 school
+                        grade level attainment/status norms.
+alt_multi_cohort_cgp_hist_plot
+                        Multiple Cohort CGP histories
+amys_lists              Students' names stacked by category, or a more
+                        informative bar graph.
+arrange_.mapvizieR_data
+                        arrange wrapper
+auto_growth_window      Extract likely growth window
+becca_plot              Becca Vichniac's Quartile (Floating Bar) Chart
+build_growth_scaffolds
+                        build_growth_scaffolds
+build_student_1year_goal_plot
+                        Generates a one-term goal plot for one student
+build_student_college_plot
+                        Combines a template and a mapvizieR object to
+                        create a student goal plot with college labels
+build_year_in_district
+                        build_year_in_district
+bulk_student_1year_goal_plot
+                        Bulk generates student goal plots
+bulk_student_historic_college_plot
+                        Bulk generates student historic college plots
+calc_baseline_detail    calc_baseline_detail
+calc_cgp                calc_cgp
+calc_normed_student_growth
+                        Calculate accelerated growth from norms using a
+                        target percentile
+calc_rit_growth_metrics
+                        Calculate growth metrics (RIT growth, meeting
+                        indicators, conditional change in test
+                        percentile, growth index, student growth
+                        percentile).
+cdf_collapse_by_grade   cdf collapse by grade
+cdf_stu_change          find the RIT and NPR change across a cdf
+cdf_to_cgp              CDF to CGP summary
+centroid                Finds the centroid of a triangle
+cgp_sim                 simulate school growth at a constant CGP
+cgp_table               display table for school/cohort growth
+                        percentile (CGP)
+check_cdf_fws           check_cdf_fws
+check_cdf_long          check_cdf_long
+check_cdf_names         check_cdf_names
+check_processed_cdf     check_processed_cdf
+check_processed_names   check_processed_names
+check_roster            check_roster
+clean_cdf               replace known bad studentids with good ones
+clean_measurementscale
+                        clean_measurementscale
+cohort_cgp_hist_plot    Shows a cohort's progress over time, in
+                        percentile space.
+cohort_expectation      cohort_expectation
+cohort_growth_expectations_plot
+                        Expectation distribution
+cohort_longitudinal_npr_plot
+                        Longitudinal plot against NPR background
+cohort_mean_rit_to_npr
+                        cohort_mean_rit_to_npr
+cohort_rit_trace_plot   Cohort RIT trace plot
+cohort_status_trace_plot
+                        Cohort Status Trace Plot
+college_label_element   abstract out the logic for writing college
+                        labels onto a template.
+dedupe_cdf              dedupe_cdf
+determine_growth_status
+                        determine growth status
+df_sorter               df_sorter
+empty_norm_grade_space
+                        empty norm grade space
+ensure_fields           ensure_fields
+ensure_goals_names      ensure_goals_names
+ensure_goals_obj        ensure_goals_obj
+ensure_is_mapvizieR     ensure_is_mapvizieR
+ensure_nonzero_students_with_norms
+                        ensure_nonzero_students_with_norms
+ensure_roster_names     ensure_roster_names
+ensure_roster_types     ensure_roster_types
+ensure_rows_in_df       ensure_rows_in_df
+error_ridden_plot       error ridden plot
+estimate_rit            estimate RIT score for a student using
+                        regression or interpolation
+ex_CombinedAssessmentResults
+                        example ex_CombinedAssessmentResults file
+                        (formerly Comprehensive Data File)
+ex_CombinedAssessmentResults_pre_2015
+                        example ex_CombinedAssessmentResults_pre_2015
+                        file (formerly Comprehensive Data File)
+ex_CombinedStudentsBySchool
+                        example ex_CombinedStudentsBySchool file
+                        (formerly Comprehensive Data File)
+extract_academic_year   extract_academic_year
+fall_goals_data_table   Basline and Goals, for printing reports
+fall_goals_report       Fall Goals Report
+fall_goals_report_p1    Fall Goals Report p 1
+fall_spring_me          fall_spring_me
+filter_.mapvizieR_data
+                        filter wrapper
+force_string_breaks     force_string_breaks
+fuzz_test_plot          fuzz_test_plot
+galloping_elephants     RIT distribution change (affectionately titled
+                        'Galloping Elephants')
+generate_growth_dfs     generate_growth_df
+get_group_stats         Calculate quartiles stats for 'haid_plot'
+goal_kipp_tiered        Create KIPP Tiered accelerated growth goals
+goal_strand_plot        Plot MAP Goal Strand Results
+goal_strand_summary_plot
+                        Plot MAP Goal Strand Summary Info
+goalbar                 goal_bar
+grade_level_seasonify   grade_level_seasonify
+grade_levelify_cdf      grade_levelify_cdf
+grade_season_factors    grade_season_factors
+grade_season_labelify   grade_season_labelify
+grob_justifier          grob_justifier
+group_by_.mapvizieR_data
+                        group_by wrapper
+growth_histogram        growth_histogram
+growth_norm_lookup      growth_norm_lookup
+growth_status_scatter   growth status scatter
+growth_testid_lookup    growth_testid_lookup
+h_var                   h_var
+haid_plot               Chris Haid's Waterfall-Rainbow-Arrow Chart
+historic_nth_percentile_plot
+                        Percent of students above a given percentile,
+                        by cohort
+historic_recap_report   Historic Recap Report
+id_cdf_type             identify type of cdf from AssessmentResults
+                        file.
+imputation_grouper      Utility function to identify groups/runs when
+                        imputing
+imputation_scaffold     Build out the base scaffold of possible terms
+                        for every student.
+impute_rit              Impute missing RIT scores
+impute_rit_simple_average
+                        Use simple averaging to impute missing rows
+is.mapvizieR            Reports whether x is a mapvizier object
+is_error                is_error
+is_not_error            is_not_error
+kipp_quartile           Calcualte KIPP Foundation style quartiles from
+                        percentile vector
+kipp_typ_growth_distro
+                        KIPP Percent Making Typ Growth Network
+                        Distribution
+knj_two_pager           two-pager, KNJ style
+make_npr_consistent     make_npr_consistent
+mapviz_cgp              mapvizieR interface to simplify CGP
+                        calculations, for one target term
+mapviz_cgp_targets      mapvizieR interface to simplify growth goal
+                        calculations
+mapvizieR               mapvizieR
+mapvizieR_data          makes data a mapvizieR_data object
+migrate_cdf_to_2015_std
+                        Migrate pre-2015 CDFs (both client-server nad
+                        WBM) to post-2015 specification,
+min_subgroup_filter     min_subgroup_filter
+min_term_filter         min_term_filter
+multi_cohort_cgp_hist_plot
+                        Multiple Cohort CGP histories
+munge_startdate         munge_startdate
+mutate_.mapvizieR_data
+                        mutate wrapper
+mv_debugging_vars       mv_debugging_vars
+mv_filter               filter mapvizieR object
+mv_limit_cdf            mv_limit_cdf
+mv_limit_growth         mv_limit_growth_df
+mv_opening_checks       mv_opening_checks
+n_timings               n_timings
+nearest_rit             find nearest RIT score for a student, by date
+norms_students_wide_to_long
+                        norms_students_wide_to_long
+npr_goal_sheet_style    Wrapper to make student percentile rank goal
+                        sheet templates KIPP NJ style
+npr_to_rit              npr_to_rit
+numeric_nwea_seasons    numeric_nwea_seasons
+ny_linking              ny linking
+ny_pass_prob            calculate new york pass probability
+ny_predicted_pass       New York predicted pass rate
+ny_predicted_proficiency
+                        ny predicted proficiency
+nys_math_3              ny state psuedo-quartiles
+one_cgp_step            wrapper to simplify CGP simulations
+only_valid_plots        only_valid_plots
+peek                    peek
+preferred_cdf_baseline
+                        composite / preferred cdf baseline
+prep_cdf_long           prep_cdf_long
+prep_roster             prep_roster
+print.mapvizieR         print method for 'mapvizier' class
+process_cdf_long        process_cdf_long
+quartile_order          quartile_order
+quealy_facet_one_subgroup
+                        quealy_facet_one_subgroup
+quealy_permutation_stats
+                        quealy_permutation_stats
+quealy_subgroups        quealy_subgroups
+rainbow_colors          creates vector of rainbow colors for student
+                        plots
+rand_stu                rand_stu
+read_cdf                Reads CDF csv files from a director
+report_dispatcher       report_dispatcher
+report_footer           Adds a simple footer to a report page at 1/20th
+                        the height of the existing content
+rit_gain_needed         rit_gain_needed
+rit_height_weight_ACT   Makes the base template that shows the RIT
+                        space and corresponding ACT lines using the
+                        original NWEA MAP ACT linking study
+rit_height_weight_npr   Makes the base template that shows the RIT
+                        space and corresponding percentile rank lines.
+rit_to_npr              rit_to_npr
+roster_to_cdf           roster_to_cdf
+roster_to_growth_df     roster_to_growth_df
+round_to_any            round_to_any
+sch_growth_lookup       sch_growth_lookup
+sch_growth_norms_2012   school growth norms 2012 study
+sch_growth_norms_2015   school growth norms 2015 study
+schambach_figure        schambach_fig
+schambach_table_1d      schambach_table
+school_status_norms_2015_dense_extended
+                        school_status_norms_2015_dense_extended 2015
+                        norm data densified and extended
+scores_by_testid        scores_by_testid
+season_fix              season fix
+select_.mapvizieR_data
+                        select wrapper
+silly_plot              silly plot
+standardize_kinder      Standardize Kindergarten code to 0 and other
+                        grades to integers
+state_pass_prob         state pass probability
+status_norms_2015       status_norms_2015 NWEA student and school
+                        status (or, attainment) norms data (2015 study)
+strand_boxes            goal strand boxes
+strands_list_plot       Creates lists of students names stacked by rank
+                        in each of a given MAP assessments goal strands
+stu_RIT_hist_plot_elements
+                        helper function to calculate plot elements
+                        per-student for college plots
+stu_growth_detail       Student growth detail
+stu_growth_detail_table
+                        Student Growth Detail Table
+student_growth_norms_2011
+                        student_growth_norms_2011 NWEA student growth
+                        norms data (2011 study)
+student_growth_norms_2015
+                        student_growth_norms_2015 NWEA student growth
+                        norms data (2015 study)
+student_npr_history_plot
+                        A small multiples plot of a set of students'
+                        national percentile rank histories.
+student_npr_two_term_plot
+                        A small multiples plot of a set of students'
+                        national percentile rank over two terms.
+student_scaffold        student_scaffold
+student_status_norms_2011
+                        student_status_norms_2011 NWEA student norm
+                        data (2011 study)
+student_status_norms_2011_dense_extended
+                        student_status_norms_2011_dense_extended 2011
+                        norm data densified and extended
+student_status_norms_2015_dense_extended
+                        student_status_norms_2015_dense_extended 2015
+                        norm data densified and extended
+summarize_.mapvizieR_data
+                        summarize wrapper
+summary.mapvizieR       summary method for 'mapvizieR' class
+summary.mapvizieR_cdf   summary method for 'mapvizieR_cdf' class
+summary.mapvizieR_growth
+                        summary method for 'mapvizieR_growth' class
+summary_long_plot       Plots mapvizieR summary object metrics
+                        longitudinally
+teacher_performance_update
+                        Teacher Performance Update
+template_01             template 1
+template_02             template 2
+template_03             template 3
+template_04             template 4
+template_05             template 5
+template_06             template 6
+tg                      tg "to grob" helper function
+tiered_growth_factors   Calculate KIPP Tiered Growth factors
+time_execution          time_execution
+two_pager               MAP two-pager
+ungroup.mapvizieR_data
+                        ungroup wrapper
+valid_grade_seasons     valid_grade_seasons

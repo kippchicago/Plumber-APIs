@@ -1,0 +1,35 @@
+add_totals_col          Append a totals column to a data.frame.
+add_totals_row          Append a totals row to a data.frame.
+adorn_crosstab          Add presentation formatting to a
+                        crosstabulation table.
+adorn_ns                Add underlying Ns to a tabyl displaying
+                        percentages.
+adorn_pct_formatting    Format a data.frame of decimals as percentages.
+adorn_percentages       Convert a data.frame of counts to percentages.
+adorn_rounding          Round the numeric columns in a data.frame.
+adorn_title             Add column name to the top of a two-way tabyl.
+adorn_totals            Append a totals row and/or column to a
+                        data.frame.
+as_tabyl                Add 'tabyl' attributes to a data.frame.
+clean_names             Cleans names of a data.frame.
+convert_to_NA           Convert string values to true 'NA' values.
+crosstab                Generate a crosstabulation of two vectors.
+excel_numeric_to_date   Convert dates encoded as serial numbers to Date
+                        class.
+get_dupes               Get rows of a 'data.frame' with identical
+                        values for the specified variables.
+janitor_deprecated      Deprecated Functions in Package janitor
+remove_empty            Remove empty rows and/or columns from a
+                        data.frame.
+remove_empty_cols       Removes empty columns from a data.frame.
+remove_empty_rows       Removes empty rows from a data.frame.
+round_half_up           Round a numeric vector; halves will be rounded
+                        up, ala Microsoft Excel.
+row_to_names            Elevate a row to be the column names of a
+                        data.frame.
+tabyl                   Generate a frequency table (1-, 2-, or 3-way).
+top_levels              Generate a frequency table of a factor grouped
+                        into top-n, bottom-n, and all other levels.
+untabyl                 Remove 'tabyl' attributes from a data.frame.
+use_first_valid_of      Returns first non-NA value from a set of
+                        vectors.

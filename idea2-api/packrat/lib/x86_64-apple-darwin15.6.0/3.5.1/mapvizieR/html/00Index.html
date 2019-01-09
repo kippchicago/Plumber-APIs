@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>R: Visualization and Data Analysis tools for NWEA MAP student data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+<h1> Visualization and Data Analysis tools for NWEA MAP student data
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;mapvizieR&rsquo; version 0.3.7</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<p style="text-align: center;">
+<a href="# "> </a>
+<a href="#A">A</a>
+<a href="#B">B</a>
+<a href="#C">C</a>
+<a href="#D">D</a>
+<a href="#E">E</a>
+<a href="#F">F</a>
+<a href="#G">G</a>
+<a href="#H">H</a>
+<a href="#I">I</a>
+<a href="#K">K</a>
+<a href="#M">M</a>
+<a href="#N">N</a>
+<a href="#O">O</a>
+<a href="#P">P</a>
+<a href="#Q">Q</a>
+<a href="#R">R</a>
+<a href="#S">S</a>
+<a href="#T">T</a>
+<a href="#U">U</a>
+<a href="#V">V</a>
+</p>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="mapvizieR.html">mapvizieR-package</a></td>
+<td>mapvizieR</td></tr>
+</table>
+
+<h2><a name="A">-- A --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="abbrev.html">abbrev</a></td>
+<td>Create vector of Initials</td></tr>
+<tr><td style="width: 25%;"><a href="act_df.html">act_df</a></td>
+<td>ACT linking data frame</td></tr>
+<tr><td style="width: 25%;"><a href="add_accelerated_growth.html">add_accelerated_growth</a></td>
+<td>Add an accelerated growth object, including projections and simulations, to a mapvizieR object</td></tr>
+<tr><td style="width: 25%;"><a href="adhoc_psuedo_quartile.html">adhoc_psuedo_quartile</a></td>
+<td>ad-hoc psuedo quartile</td></tr>
+<tr><td style="width: 25%;"><a href="alt_cohort_cgp_hist_plot.html">alt_cohort_cgp_hist_plot</a></td>
+<td>Shows a cohort's progress over time.  Similar to cohort_cgp_hist, but uses the 2015 school grade level attainment/status norms.</td></tr>
+<tr><td style="width: 25%;"><a href="alt_multi_cohort_cgp_hist_plot.html">alt_multi_cohort_cgp_hist_plot</a></td>
+<td>Multiple Cohort CGP histories</td></tr>
+<tr><td style="width: 25%;"><a href="amys_lists.html">amys_lists</a></td>
+<td>Students' names stacked by category, or a more informative bar graph.</td></tr>
+<tr><td style="width: 25%;"><a href="arrange.html">arrange_.mapvizieR_data</a></td>
+<td>arrange wrapper</td></tr>
+<tr><td style="width: 25%;"><a href="auto_growth_window.html">auto_growth_window</a></td>
+<td>Extract likely growth window</td></tr>
+</table>
+
+<h2><a name="B">-- B --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="becca_plot.html">becca_plot</a></td>
+<td>Becca Vichniac's Quartile (Floating Bar) Chart</td></tr>
+<tr><td style="width: 25%;"><a href="build_growth_scaffolds.html">build_growth_scaffolds</a></td>
+<td>build_growth_scaffolds</td></tr>
+<tr><td style="width: 25%;"><a href="build_student_1year_goal_plot.html">build_student_1year_goal_plot</a></td>
+<td>Generates a one-term goal plot for one student</td></tr>
+<tr><td style="width: 25%;"><a href="build_student_college_plot.html">build_student_college_plot</a></td>
+<td>Combines a template and a mapvizieR object to create a student goal plot with college labels</td></tr>
+<tr><td style="width: 25%;"><a href="build_year_in_district.html">build_year_in_district</a></td>
+<td>build_year_in_district</td></tr>
+<tr><td style="width: 25%;"><a href="bulk_student_1year_goal_plot.html">bulk_student_1year_goal_plot</a></td>
+<td>Bulk generates student goal plots</td></tr>
+<tr><td style="width: 25%;"><a href="bulk_student_historic_college_plot.html">bulk_student_historic_college_plot</a></td>
+<td>Bulk generates student historic college plots</td></tr>
+</table>
+
+<h2><a name="C">-- C --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="calc_baseline_detail.html">calc_baseline_detail</a></td>
+<td>calc_baseline_detail</td></tr>
+<tr><td style="width: 25%;"><a href="calc_cgp.html">calc_cgp</a></td>
+<td>calc_cgp</td></tr>
+<tr><td style="width: 25%;"><a href="calc_normed_student_growth.html">calc_normed_student_growth</a></td>
+<td>Calculate accelerated growth from norms using a target percentile</td></tr>
+<tr><td style="width: 25%;"><a href="calc_rit_growth_metrics.html">calc_rit_growth_metrics</a></td>
+<td>Calculate growth metrics (RIT growth, meeting indicators, conditional change in test percentile, growth index, student growth percentile).</td></tr>
+<tr><td style="width: 25%;"><a href="cdf_collapse_by_grade.html">cdf_collapse_by_grade</a></td>
+<td>cdf collapse by grade</td></tr>
+<tr><td style="width: 25%;"><a href="cdf_stu_change.html">cdf_stu_change</a></td>
+<td>find the RIT and NPR change across a cdf</td></tr>
+<tr><td style="width: 25%;"><a href="cdf_to_cgp.html">cdf_to_cgp</a></td>
+<td>CDF to CGP summary</td></tr>
+<tr><td style="width: 25%;"><a href="centroid.html">centroid</a></td>
+<td>Finds the centroid of a triangle</td></tr>
+<tr><td style="width: 25%;"><a href="cgp_sim.html">cgp_sim</a></td>
+<td>simulate school growth at a constant CGP</td></tr>
+<tr><td style="width: 25%;"><a href="cgp_table.html">cgp_table</a></td>
+<td>display table for school/cohort growth percentile (CGP)</td></tr>
+<tr><td style="width: 25%;"><a href="check_cdf_fws.html">check_cdf_fws</a></td>
+<td>check_cdf_fws</td></tr>
+<tr><td style="width: 25%;"><a href="check_cdf_long.html">check_cdf_long</a></td>
+<td>check_cdf_long</td></tr>
+<tr><td style="width: 25%;"><a href="check_cdf_names.html">check_cdf_names</a></td>
+<td>check_cdf_names</td></tr>
+<tr><td style="width: 25%;"><a href="check_processed_cdf.html">check_processed_cdf</a></td>
+<td>check_processed_cdf</td></tr>
+<tr><td style="width: 25%;"><a href="check_processed_names.html">check_processed_names</a></td>
+<td>check_processed_names</td></tr>
+<tr><td style="width: 25%;"><a href="check_roster.html">check_roster</a></td>
+<td>check_roster</td></tr>
+<tr><td style="width: 25%;"><a href="clean_cdf.html">clean_cdf</a></td>
+<td>replace known bad studentids with good ones</td></tr>
+<tr><td style="width: 25%;"><a href="clean_measurementscale.html">clean_measurementscale</a></td>
+<td>clean_measurementscale</td></tr>
+<tr><td style="width: 25%;"><a href="cohort_cgp_hist_plot.html">cohort_cgp_hist_plot</a></td>
+<td>Shows a cohort's progress over time, in percentile space.</td></tr>
+<tr><td style="width: 25%;"><a href="cohort_expectation.html">cohort_expectation</a></td>
+<td>cohort_expectation</td></tr>
+<tr><td style="width: 25%;"><a href="cohort_growth_expectations_plot.html">cohort_growth_expectations_plot</a></td>
+<td>Expectation distribution</td></tr>
+<tr><td style="width: 25%;"><a href="cohort_longitudinal_npr_plot.html">cohort_longitudinal_npr_plot</a></td>
+<td>Longitudinal plot against NPR background</td></tr>
+<tr><td style="width: 25%;"><a href="cohort_mean_rit_to_npr.html">cohort_mean_rit_to_npr</a></td>
+<td>cohort_mean_rit_to_npr</td></tr>
+<tr><td style="width: 25%;"><a href="cohort_rit_trace_plot.html">cohort_rit_trace_plot</a></td>
+<td>Cohort RIT trace plot</td></tr>
+<tr><td style="width: 25%;"><a href="cohort_status_trace_plot.html">cohort_status_trace_plot</a></td>
+<td>Cohort Status Trace Plot</td></tr>
+<tr><td style="width: 25%;"><a href="college_label_element.html">college_label_element</a></td>
+<td>abstract out the logic for writing college labels onto a template.</td></tr>
+</table>
+
+<h2><a name="D">-- D --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="dedupe_cdf.html">dedupe_cdf</a></td>
+<td>dedupe_cdf</td></tr>
+<tr><td style="width: 25%;"><a href="determine_growth_status.html">determine_growth_status</a></td>
+<td>determine growth status</td></tr>
+<tr><td style="width: 25%;"><a href="df_sorter.html">df_sorter</a></td>
+<td>df_sorter</td></tr>
+</table>
+
+<h2><a name="E">-- E --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="empty_norm_grade_space.html">empty_norm_grade_space</a></td>
+<td>empty norm grade space</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_fields.html">ensure_fields</a></td>
+<td>ensure_fields</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_goals_names.html">ensure_goals_names</a></td>
+<td>ensure_goals_names</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_goals_obj.html">ensure_goals_obj</a></td>
+<td>ensure_goals_obj</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_is_mapvizieR.html">ensure_is_mapvizieR</a></td>
+<td>ensure_is_mapvizieR</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_nonzero_students_with_norms.html">ensure_nonzero_students_with_norms</a></td>
+<td>ensure_nonzero_students_with_norms</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_roster_names.html">ensure_roster_names</a></td>
+<td>ensure_roster_names</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_roster_types.html">ensure_roster_types</a></td>
+<td>ensure_roster_types</td></tr>
+<tr><td style="width: 25%;"><a href="ensure_rows_in_df.html">ensure_rows_in_df</a></td>
+<td>ensure_rows_in_df</td></tr>
+<tr><td style="width: 25%;"><a href="error_ridden_plot.html">error_ridden_plot</a></td>
+<td>error ridden plot</td></tr>
+<tr><td style="width: 25%;"><a href="estimate_rit.html">estimate_rit</a></td>
+<td>estimate RIT score for a student using regression or interpolation</td></tr>
+<tr><td style="width: 25%;"><a href="extract_academic_year.html">extract_academic_year</a></td>
+<td>extract_academic_year</td></tr>
+<tr><td style="width: 25%;"><a href="ex_CombinedAssessmentResults.html">ex_CombinedAssessmentResults</a></td>
+<td>example ex_CombinedAssessmentResults file (formerly Comprehensive Data File)</td></tr>
+<tr><td style="width: 25%;"><a href="ex_CombinedAssessmentResults_pre_2015.html">ex_CombinedAssessmentResults_pre_2015</a></td>
+<td>example ex_CombinedAssessmentResults_pre_2015 file (formerly Comprehensive Data File)</td></tr>
+<tr><td style="width: 25%;"><a href="ex_CombinedStudentsBySchool.html">ex_CombinedStudentsBySchool</a></td>
+<td>example ex_CombinedStudentsBySchool file (formerly Comprehensive Data File)</td></tr>
+</table>
+
+<h2><a name="F">-- F --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="fall_goals_data_table.html">fall_goals_data_table</a></td>
+<td>Basline and Goals, for printing reports</td></tr>
+<tr><td style="width: 25%;"><a href="fall_goals_report.html">fall_goals_report</a></td>
+<td>Fall Goals Report</td></tr>
+<tr><td style="width: 25%;"><a href="fall_goals_report_p1.html">fall_goals_report_p1</a></td>
+<td>Fall Goals Report p 1</td></tr>
+<tr><td style="width: 25%;"><a href="fall_spring_me.html">fall_spring_me</a></td>
+<td>fall_spring_me</td></tr>
+<tr><td style="width: 25%;"><a href="filter.html">filter_.mapvizieR_data</a></td>
+<td>filter wrapper</td></tr>
+<tr><td style="width: 25%;"><a href="force_string_breaks.html">force_string_breaks</a></td>
+<td>force_string_breaks</td></tr>
+<tr><td style="width: 25%;"><a href="fuzz_test_plot.html">fuzz_test_plot</a></td>
+<td>fuzz_test_plot</td></tr>
+</table>
+
+<h2><a name="G">-- G --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="galloping_elephants.html">galloping_elephants</a></td>
+<td>RIT distribution change (affectionately titled 'Galloping Elephants')</td></tr>
+<tr><td style="width: 25%;"><a href="generate_growth_dfs.html">generate_growth_dfs</a></td>
+<td>generate_growth_df</td></tr>
+<tr><td style="width: 25%;"><a href="get_group_stats.html">get_group_stats</a></td>
+<td>Calculate quartiles stats for 'haid_plot'</td></tr>
+<tr><td style="width: 25%;"><a href="goalbar.html">goalbar</a></td>
+<td>goal_bar</td></tr>
+<tr><td style="width: 25%;"><a href="goal_kipp_tiered.html">goal_kipp_tiered</a></td>
+<td>Create KIPP Tiered accelerated growth goals</td></tr>
+<tr><td style="width: 25%;"><a href="goal_strand_plot.html">goal_strand_plot</a></td>
+<td>Plot MAP Goal Strand Results</td></tr>
+<tr><td style="width: 25%;"><a href="goal_strand_summary_plot.html">goal_strand_summary_plot</a></td>
+<td>Plot MAP Goal Strand Summary Info</td></tr>
+<tr><td style="width: 25%;"><a href="grade_levelify_cdf.html">grade_levelify_cdf</a></td>
+<td>grade_levelify_cdf</td></tr>
+<tr><td style="width: 25%;"><a href="grade_level_seasonify.html">grade_level_seasonify</a></td>
+<td>grade_level_seasonify</td></tr>
+<tr><td style="width: 25%;"><a href="grade_season_factors.html">grade_season_factors</a></td>
+<td>grade_season_factors</td></tr>
+<tr><td style="width: 25%;"><a href="grade_season_labelify.html">grade_season_labelify</a></td>
+<td>grade_season_labelify</td></tr>
+<tr><td style="width: 25%;"><a href="grob_justifier.html">grob_justifier</a></td>
+<td>grob_justifier</td></tr>
+<tr><td style="width: 25%;"><a href="group_by.html">group_by_.mapvizieR_data</a></td>
+<td>group_by wrapper</td></tr>
+<tr><td style="width: 25%;"><a href="growth_histogram.html">growth_histogram</a></td>
+<td>growth_histogram</td></tr>
+<tr><td style="width: 25%;"><a href="growth_norm_lookup.html">growth_norm_lookup</a></td>
+<td>growth_norm_lookup</td></tr>
+<tr><td style="width: 25%;"><a href="growth_status_scatter.html">growth_status_scatter</a></td>
+<td>growth status scatter</td></tr>
+<tr><td style="width: 25%;"><a href="growth_testid_lookup.html">growth_testid_lookup</a></td>
+<td>growth_testid_lookup</td></tr>
+</table>
+
+<h2><a name="H">-- H --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="haid_plot.html">haid_plot</a></td>
+<td>Chris Haid's Waterfall-Rainbow-Arrow Chart</td></tr>
+<tr><td style="width: 25%;"><a href="historic_nth_percentile_plot.html">historic_nth_percentile_plot</a></td>
+<td>Percent of students above a given percentile, by cohort</td></tr>
+<tr><td style="width: 25%;"><a href="historic_recap_report.html">historic_recap_report</a></td>
+<td>Historic Recap Report</td></tr>
+<tr><td style="width: 25%;"><a href="h_var.html">h_var</a></td>
+<td>h_var</td></tr>
+</table>
+
+<h2><a name="I">-- I --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="id_cdf_type.html">id_cdf_type</a></td>
+<td>identify type of cdf from AssessmentResults file.</td></tr>
+<tr><td style="width: 25%;"><a href="imputation_grouper.html">imputation_grouper</a></td>
+<td>Utility function to identify groups/runs when imputing</td></tr>
+<tr><td style="width: 25%;"><a href="imputation_scaffold.html">imputation_scaffold</a></td>
+<td>Build out the base scaffold of possible terms for every student.</td></tr>
+<tr><td style="width: 25%;"><a href="impute_rit.html">impute_rit</a></td>
+<td>Impute missing RIT scores</td></tr>
+<tr><td style="width: 25%;"><a href="impute_rit_simple_average.html">impute_rit_simple_average</a></td>
+<td>Use simple averaging to impute missing rows</td></tr>
+<tr><td style="width: 25%;"><a href="is.mapvizieR.html">is.mapvizieR</a></td>
+<td>Reports whether x is a mapvizier object</td></tr>
+<tr><td style="width: 25%;"><a href="is_error.html">is_error</a></td>
+<td>is_error</td></tr>
+<tr><td style="width: 25%;"><a href="is_not_error.html">is_not_error</a></td>
+<td>is_not_error</td></tr>
+</table>
+
+<h2><a name="K">-- K --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="kipp_quartile.html">kipp_quartile</a></td>
+<td>Calcualte KIPP Foundation style quartiles from percentile vector</td></tr>
+<tr><td style="width: 25%;"><a href="kipp_typ_growth_distro.html">kipp_typ_growth_distro</a></td>
+<td>KIPP Percent Making Typ Growth Network Distribution</td></tr>
+<tr><td style="width: 25%;"><a href="knj_two_pager.html">knj_two_pager</a></td>
+<td>two-pager, KNJ style</td></tr>
+</table>
+
+<h2><a name="M">-- M --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="make_npr_consistent.html">make_npr_consistent</a></td>
+<td>make_npr_consistent</td></tr>
+<tr><td style="width: 25%;"><a href="mapvizieR.html">mapvizieR</a></td>
+<td>mapvizieR</td></tr>
+<tr><td style="width: 25%;"><a href="mapvizieR_data.html">mapvizieR_data</a></td>
+<td>makes data a mapvizieR_data object</td></tr>
+<tr><td style="width: 25%;"><a href="mapviz_cgp.html">mapviz_cgp</a></td>
+<td>mapvizieR interface to simplify CGP calculations, for one target term</td></tr>
+<tr><td style="width: 25%;"><a href="mapviz_cgp_targets.html">mapviz_cgp_targets</a></td>
+<td>mapvizieR interface to simplify growth goal calculations</td></tr>
+<tr><td style="width: 25%;"><a href="migrate_cdf_to_2015_std.html">migrate_cdf_to_2015_std</a></td>
+<td>Migrate pre-2015 CDFs (both client-server nad WBM) to post-2015 specification,</td></tr>
+<tr><td style="width: 25%;"><a href="min_subgroup_filter.html">min_subgroup_filter</a></td>
+<td>min_subgroup_filter</td></tr>
+<tr><td style="width: 25%;"><a href="min_term_filter.html">min_term_filter</a></td>
+<td>min_term_filter</td></tr>
+<tr><td style="width: 25%;"><a href="multi_cohort_cgp_hist_plot.html">multi_cohort_cgp_hist_plot</a></td>
+<td>Multiple Cohort CGP histories</td></tr>
+<tr><td style="width: 25%;"><a href="munge_startdate.html">munge_startdate</a></td>
+<td>munge_startdate</td></tr>
+<tr><td style="width: 25%;"><a href="mutate.html">mutate_.mapvizieR_data</a></td>
+<td>mutate wrapper</td></tr>
+<tr><td style="width: 25%;"><a href="mv_debugging_vars.html">mv_debugging_vars</a></td>
+<td>mv_debugging_vars</td></tr>
+<tr><td style="width: 25%;"><a href="mv_filter.html">mv_filter</a></td>
+<td>filter mapvizieR object</td></tr>
+<tr><td style="width: 25%;"><a href="mv_limit_cdf.html">mv_limit_cdf</a></td>
+<td>mv_limit_cdf</td></tr>
+<tr><td style="width: 25%;"><a href="mv_limit_growth.html">mv_limit_growth</a></td>
+<td>mv_limit_growth_df</td></tr>
+<tr><td style="width: 25%;"><a href="mv_opening_checks.html">mv_opening_checks</a></td>
+<td>mv_opening_checks</td></tr>
+</table>
+
+<h2><a name="N">-- N --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="nearest_rit.html">nearest_rit</a></td>
+<td>find nearest RIT score for a student, by date</td></tr>
+<tr><td style="width: 25%;"><a href="norms_students_wide_to_long.html">norms_students_wide_to_long</a></td>
+<td>norms_students_wide_to_long</td></tr>
+<tr><td style="width: 25%;"><a href="npr_goal_sheet_style.html">npr_goal_sheet_style</a></td>
+<td>Wrapper to make student percentile rank goal sheet templates KIPP NJ style</td></tr>
+<tr><td style="width: 25%;"><a href="npr_to_rit.html">npr_to_rit</a></td>
+<td>npr_to_rit</td></tr>
+<tr><td style="width: 25%;"><a href="numeric_nwea_seasons.html">numeric_nwea_seasons</a></td>
+<td>numeric_nwea_seasons</td></tr>
+<tr><td style="width: 25%;"><a href="nys_math_3.html">nys_math_3</a></td>
+<td>ny state psuedo-quartiles</td></tr>
+<tr><td style="width: 25%;"><a href="nys_math_3.html">nys_math_4</a></td>
+<td>ny state psuedo-quartiles</td></tr>
+<tr><td style="width: 25%;"><a href="nys_math_3.html">nys_read_3</a></td>
+<td>ny state psuedo-quartiles</td></tr>
+<tr><td style="width: 25%;"><a href="nys_math_3.html">nys_read_4</a></td>
+<td>ny state psuedo-quartiles</td></tr>
+<tr><td style="width: 25%;"><a href="ny_linking.html">ny_linking</a></td>
+<td>ny linking</td></tr>
+<tr><td style="width: 25%;"><a href="ny_pass_prob.html">ny_pass_prob</a></td>
+<td>calculate new york pass probability</td></tr>
+<tr><td style="width: 25%;"><a href="ny_predicted_pass.html">ny_predicted_pass</a></td>
+<td>New York predicted pass rate</td></tr>
+<tr><td style="width: 25%;"><a href="ny_predicted_proficiency.html">ny_predicted_proficiency</a></td>
+<td>ny predicted proficiency</td></tr>
+<tr><td style="width: 25%;"><a href="n_timings.html">n_timings</a></td>
+<td>n_timings</td></tr>
+</table>
+
+<h2><a name="O">-- O --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="one_cgp_step.html">one_cgp_step</a></td>
+<td>wrapper to simplify CGP simulations</td></tr>
+<tr><td style="width: 25%;"><a href="only_valid_plots.html">only_valid_plots</a></td>
+<td>only_valid_plots</td></tr>
+</table>
+
+<h2><a name="P">-- P --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="peek.html">peek</a></td>
+<td>peek</td></tr>
+<tr><td style="width: 25%;"><a href="preferred_cdf_baseline.html">preferred_cdf_baseline</a></td>
+<td>composite / preferred cdf baseline</td></tr>
+<tr><td style="width: 25%;"><a href="prep_cdf_long.html">prep_cdf_long</a></td>
+<td>prep_cdf_long</td></tr>
+<tr><td style="width: 25%;"><a href="prep_roster.html">prep_roster</a></td>
+<td>prep_roster</td></tr>
+<tr><td style="width: 25%;"><a href="print.html">print.mapvizieR</a></td>
+<td>print method for 'mapvizier' class</td></tr>
+<tr><td style="width: 25%;"><a href="process_cdf_long.html">process_cdf_long</a></td>
+<td>process_cdf_long</td></tr>
+</table>
+
+<h2><a name="Q">-- Q --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="quartile_order.html">quartile_order</a></td>
+<td>quartile_order</td></tr>
+<tr><td style="width: 25%;"><a href="quealy_facet_one_subgroup.html">quealy_facet_one_subgroup</a></td>
+<td>quealy_facet_one_subgroup</td></tr>
+<tr><td style="width: 25%;"><a href="quealy_permutation_stats.html">quealy_permutation_stats</a></td>
+<td>quealy_permutation_stats</td></tr>
+<tr><td style="width: 25%;"><a href="quealy_subgroups.html">quealy_subgroups</a></td>
+<td>quealy_subgroups</td></tr>
+</table>
+
+<h2><a name="R">-- R --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="rainbow_colors.html">rainbow_colors</a></td>
+<td>creates vector of rainbow colors for student plots</td></tr>
+<tr><td style="width: 25%;"><a href="rand_stu.html">rand_stu</a></td>
+<td>rand_stu</td></tr>
+<tr><td style="width: 25%;"><a href="read_cdf.html">read_cdf</a></td>
+<td>Reads CDF csv files from a director</td></tr>
+<tr><td style="width: 25%;"><a href="report_dispatcher.html">report_dispatcher</a></td>
+<td>report_dispatcher</td></tr>
+<tr><td style="width: 25%;"><a href="report_footer.html">report_footer</a></td>
+<td>Adds a simple footer to a report page at 1/20th the height of the existing content</td></tr>
+<tr><td style="width: 25%;"><a href="rit_gain_needed.html">rit_gain_needed</a></td>
+<td>rit_gain_needed</td></tr>
+<tr><td style="width: 25%;"><a href="rit_height_weight_ACT.html">rit_height_weight_ACT</a></td>
+<td>Makes the base template that shows the RIT space and corresponding ACT lines using the original NWEA MAP ACT linking study</td></tr>
+<tr><td style="width: 25%;"><a href="rit_height_weight_npr.html">rit_height_weight_npr</a></td>
+<td>Makes the base template that shows the RIT space and corresponding percentile rank lines.</td></tr>
+<tr><td style="width: 25%;"><a href="rit_to_npr.html">rit_to_npr</a></td>
+<td>rit_to_npr</td></tr>
+<tr><td style="width: 25%;"><a href="roster_to_cdf.html">roster_to_cdf</a></td>
+<td>roster_to_cdf</td></tr>
+<tr><td style="width: 25%;"><a href="roster_to_growth_df.html">roster_to_growth_df</a></td>
+<td>roster_to_growth_df</td></tr>
+<tr><td style="width: 25%;"><a href="round_to_any.html">round_to_any</a></td>
+<td>round_to_any</td></tr>
+</table>
+
+<h2><a name="S">-- S --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="schambach_figure.html">schambach_figure</a></td>
+<td>schambach_fig</td></tr>
+<tr><td style="width: 25%;"><a href="schambach_table_1d.html">schambach_table_1d</a></td>
+<td>schambach_table</td></tr>
+<tr><td style="width: 25%;"><a href="school_status_norms_2015_dense_extended.html">school_status_norms_2015_dense_extended</a></td>
+<td>school_status_norms_2015_dense_extended 2015 norm data densified and extended</td></tr>
+<tr><td style="width: 25%;"><a href="sch_growth_lookup.html">sch_growth_lookup</a></td>
+<td>sch_growth_lookup</td></tr>
+<tr><td style="width: 25%;"><a href="sch_growth_norms_2012.html">sch_growth_norms_2012</a></td>
+<td>school growth norms 2012 study</td></tr>
+<tr><td style="width: 25%;"><a href="sch_growth_norms_2015.html">sch_growth_norms_2015</a></td>
+<td>school growth norms 2015 study</td></tr>
+<tr><td style="width: 25%;"><a href="scores_by_testid.html">scores_by_testid</a></td>
+<td>scores_by_testid</td></tr>
+<tr><td style="width: 25%;"><a href="season_fix.html">season_fix</a></td>
+<td>season fix</td></tr>
+<tr><td style="width: 25%;"><a href="select.html">select_.mapvizieR_data</a></td>
+<td>select wrapper</td></tr>
+<tr><td style="width: 25%;"><a href="silly_plot.html">silly_plot</a></td>
+<td>silly plot</td></tr>
+<tr><td style="width: 25%;"><a href="standardize_kinder.html">standardize_kinder</a></td>
+<td>Standardize Kindergarten code to 0 and other grades to integers</td></tr>
+<tr><td style="width: 25%;"><a href="state_pass_prob.html">state_pass_prob</a></td>
+<td>state pass probability</td></tr>
+<tr><td style="width: 25%;"><a href="status_norms_2015.html">status_norms_2015</a></td>
+<td>status_norms_2015 NWEA student and school status (or, attainment) norms data (2015 study)</td></tr>
+<tr><td style="width: 25%;"><a href="strands_list_plot.html">strands_list_plot</a></td>
+<td>Creates lists of students names stacked by rank in each of a given MAP assessments goal strands</td></tr>
+<tr><td style="width: 25%;"><a href="strand_boxes.html">strand_boxes</a></td>
+<td>goal strand boxes</td></tr>
+<tr><td style="width: 25%;"><a href="student_growth_norms_2011.html">student_growth_norms_2011</a></td>
+<td>student_growth_norms_2011 NWEA student growth norms data (2011 study)</td></tr>
+<tr><td style="width: 25%;"><a href="student_growth_norms_2015.html">student_growth_norms_2015</a></td>
+<td>student_growth_norms_2015 NWEA student growth norms data (2015 study)</td></tr>
+<tr><td style="width: 25%;"><a href="student_npr_history_plot.html">student_npr_history_plot</a></td>
+<td>A small multiples plot of a set of students' national percentile rank histories.</td></tr>
+<tr><td style="width: 25%;"><a href="student_npr_two_term_plot.html">student_npr_two_term_plot</a></td>
+<td>A small multiples plot of a set of students' national percentile rank over two terms.</td></tr>
+<tr><td style="width: 25%;"><a href="student_scaffold.html">student_scaffold</a></td>
+<td>student_scaffold</td></tr>
+<tr><td style="width: 25%;"><a href="student_status_norms_2011.html">student_status_norms_2011</a></td>
+<td>student_status_norms_2011 NWEA student norm data (2011 study)</td></tr>
+<tr><td style="width: 25%;"><a href="student_status_norms_2011_dense_extended.html">student_status_norms_2011_dense_extended</a></td>
+<td>student_status_norms_2011_dense_extended 2011 norm data densified and extended</td></tr>
+<tr><td style="width: 25%;"><a href="student_status_norms_2015_dense_extended.html">student_status_norms_2015_dense_extended</a></td>
+<td>student_status_norms_2015_dense_extended 2015 norm data densified and extended</td></tr>
+<tr><td style="width: 25%;"><a href="stu_growth_detail.html">stu_growth_detail</a></td>
+<td>Student growth detail</td></tr>
+<tr><td style="width: 25%;"><a href="stu_growth_detail_table.html">stu_growth_detail_table</a></td>
+<td>Student Growth Detail Table</td></tr>
+<tr><td style="width: 25%;"><a href="stu_RIT_hist_plot_elements.html">stu_RIT_hist_plot_elements</a></td>
+<td>helper function to calculate plot elements per-student for college plots</td></tr>
+<tr><td style="width: 25%;"><a href="summarize.html">summarize_.mapvizieR_data</a></td>
+<td>summarize wrapper</td></tr>
+<tr><td style="width: 25%;"><a href="summary.mapvizieR.html">summary.mapvizieR</a></td>
+<td>summary method for 'mapvizieR' class</td></tr>
+<tr><td style="width: 25%;"><a href="summary.mapvizieR_cdf.html">summary.mapvizieR_cdf</a></td>
+<td>summary method for 'mapvizieR_cdf' class</td></tr>
+<tr><td style="width: 25%;"><a href="summary.mapvizieR_growth.html">summary.mapvizieR_growth</a></td>
+<td>summary method for 'mapvizieR_growth' class</td></tr>
+<tr><td style="width: 25%;"><a href="summary_long_plot.html">summary_long_plot</a></td>
+<td>Plots mapvizieR summary object metrics longitudinally</td></tr>
+</table>
+
+<h2><a name="T">-- T --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="teacher_performance_update.html">teacher_performance_update</a></td>
+<td>Teacher Performance Update</td></tr>
+<tr><td style="width: 25%;"><a href="template_01.html">template_01</a></td>
+<td>template 1</td></tr>
+<tr><td style="width: 25%;"><a href="template_02.html">template_02</a></td>
+<td>template 2</td></tr>
+<tr><td style="width: 25%;"><a href="template_03.html">template_03</a></td>
+<td>template 3</td></tr>
+<tr><td style="width: 25%;"><a href="template_04.html">template_04</a></td>
+<td>template 4</td></tr>
+<tr><td style="width: 25%;"><a href="template_05.html">template_05</a></td>
+<td>template 5</td></tr>
+<tr><td style="width: 25%;"><a href="template_06.html">template_06</a></td>
+<td>template 6</td></tr>
+<tr><td style="width: 25%;"><a href="tg.html">tg</a></td>
+<td>tg "to grob" helper function</td></tr>
+<tr><td style="width: 25%;"><a href="tiered_growth_factors.html">tiered_growth_factors</a></td>
+<td>Calculate KIPP Tiered Growth factors</td></tr>
+<tr><td style="width: 25%;"><a href="time_execution.html">time_execution</a></td>
+<td>time_execution</td></tr>
+<tr><td style="width: 25%;"><a href="two_pager.html">two_pager</a></td>
+<td>MAP two-pager</td></tr>
+</table>
+
+<h2><a name="U">-- U --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="ungroup.html">ungroup.mapvizieR_data</a></td>
+<td>ungroup wrapper</td></tr>
+</table>
+
+<h2><a name="V">-- V --</a></h2>
+
+<table width="100%">
+<tr><td style="width: 25%;"><a href="valid_grade_seasons.html">valid_grade_seasons</a></td>
+<td>valid_grade_seasons</td></tr>
+</table>
+</body></html>

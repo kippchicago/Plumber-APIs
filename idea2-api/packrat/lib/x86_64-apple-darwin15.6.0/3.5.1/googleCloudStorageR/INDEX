@@ -1,0 +1,37 @@
+gcs_auth                Authenticate this session
+gcs_create_bucket       Create a new bucket
+gcs_create_bucket_acl   Create a Bucket Access Controls
+gcs_create_lifecycle    Create a lifecycle condition
+gcs_create_pubsub       Create a pub/sub notification for a bucket
+gcs_delete_bucket       Delete a bucket
+gcs_delete_object       Delete an object
+gcs_delete_pubsub       Delete pub/sub notifications for a bucket
+gcs_download_url        Get the download URL
+gcs_first               Save your R session to the cloud on
+                        startup/exit
+gcs_get_bucket          Get bucket info
+gcs_get_bucket_acl      Get Bucket Access Controls
+gcs_get_global_bucket   Get global bucket name
+gcs_get_object          Get an object in a bucket directly
+gcs_get_object_acl      Check the access control settings for an object
+                        for one entity
+gcs_get_service_email   Get the email of service account associated
+                        with the bucket
+gcs_global_bucket       Set global bucket name
+gcs_list_buckets        List buckets
+gcs_list_objects        List objects in a bucket
+gcs_list_pubsub         List pub/sub notifications for a bucket
+gcs_load                Load .RData objects or sessions from the Google
+                        Cloud
+gcs_metadata_object     Make metadata for an object
+gcs_parse_download      Parse downloaded objects straight into R
+gcs_retry_upload        Retry a resumeable upload
+gcs_save                Save .RData objects to the Google Cloud
+gcs_save_all            Save/Load all files in directory to Google
+                        Cloud Storage
+gcs_save_image          Save an R session to the Google Cloud
+gcs_signed_url          Create a signed URL
+gcs_source              Source an R script from the Google Cloud
+gcs_update_object_acl   Change access to an object in a bucket
+gcs_upload              Upload a file of arbitrary type
+googleCloudStorageR     googleCloudStorageR

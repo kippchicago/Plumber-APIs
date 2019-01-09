@@ -1,0 +1,390 @@
+---
+title: "The ensurer package"
+author: "Stefan Holst Milton Bache"
+date: "This version: April, 2015"
+output: html_document
+---
+
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{The ensurer}
+-->
+
+The ensurer package
+===================
+
+*Stefan Holst Milton Bache. This version: April, 2015.*
+
+# Introduction
+The `R` programming language is becoming an integrated part of data solutions
+and analyses in many production environments. This is no surprise: it is very 
+powerful and goals are often very quickly accomplished with `R` compared to many 
+of its competitors, and it is therefore a primary tool of choice for many 
+statisticians, data scientists, and the like.
+
+A common argument against it, however, is the lack of e.g. type safety, and 
+a compiler that guards against many potential code problems. 
+To make the situation even 
+more dangerous, it is very common in `R` to have functions that accept different
+types for the same argument, and they may even return different types depending
+on various inputs and circumstances. 
+The very large community, which is one of `R`'s strengths,
+should also raise caution, as developers adhere to different principles, styles,
+and standards.
+
+When putting an `R` program into production one should therefore be careful
+and aware of the various sources of risk. 
+External data sources or schematics may change; 
+packages on which you depend may change; resources may be temporarily 
+unavailable, etc. While there is little hope to solve these kinds of problems
+altogether, it can be essential *become aware* of issues as soon as they arise
+and take proper action. In particular, unexpected behavior may not 
+itself raise an error (due to the lack of type safety) 
+but may result in "corrupted" data which may propagate,
+and when errors occur down the road, the initial source of the problem can be
+hard and/or time consuming to track down.
+
+The `ensurer` package has one aim: to make it as simple as possible to
+ensure expected/needed/desired properties of your data, and to take proper 
+action upon failure to comply.
+
+# Basics
+The `ensurer` package does not depend on other packages, but its semantics are
+designed with `%>%`, the `magrittr` pipe, in mind. This will make it very 
+natural to attach an ensuring contract to the result of a data pipeline 
+before assigning it to a name, or returning it from a function, etc.
+The examples below will use `%>%` but it should be clear how to proceed without.
+
+Usage is simple. There are only two functions to remember:
+
+```{r, eval=FALSE}
+1. ensure_that:  function(., ..., fail_with, err_desc)  [short-hand alias: ensure]
+2. ensures_that: function(..., fail_with, err_desc)     [short-hand alias: ensures]
+```
+
+The first (in imperative form) takes a value (`.`) and a set of 
+conditions (`...`) which are verified for the value. Upon success, 
+the value itself is returned and upon
+failure an error is raised (default behavior, which can be modified.)
+The second (in present tense) takes only the conditions and creates a 
+function which can be reused to ensure these. The arguments `fail_with` and 
+`err_desc` can be (but need not be) specified to alter the default behavior.
+
+Stating the conditions is simple, each is an expression which result in 
+`TRUE` or `FALSE` and they are separated with commas (technical note: conditions
+are checked with `isTRUE`, and conditions should therefore not result in vectors
+as this will count as failure even if all entries are `TRUE`.) 
+To reference the value itself, use the dot-placeholder (`.`). 
+
+As an example, suppose you have a function `get_matrix` which is supposed to
+return a square matrix. The function may read an external text file, or 
+otherwise be vulnerable to data corruption. Suppose that you need the 
+matrix to be square, and you need it to be numeric. Here's how:
+
+```{r, eval=FALSE}
+the_matrix <-
+  get_matrix() %>%
+  ensure_that(is.numeric(.), 
+              NCOL(.) == NROW(.))
+```
+
+If `get_matrix` returns valid data, everything is fine. But suppose
+a character somehow found its way in, coercing everything to the character type.
+In this case the default behavior is to raise an error with details on which
+conditions failed (all will be tested, even if previous ones fail). 
+In this case the error is:
+
+```{r eval=FALSE}
+ Error: conditions failed for call 'get_matrix %>% ensu .. NCOL(.) == NROW(.))':
+   * is.numeric(.)
+``` 
+Simple predicate functions can also be used with a short-hand notation where
+the dot is omitted; here is the example above where numeric condition is
+changed:
+```{r, eval=FALSE}
+the_matrix <-
+  get_matrix() %>%
+  ensure_that(is.numeric,
+              NCOL(.) == NROW(.))
+```
+
+The *second* function, `ensures_that` (note: present tense, not imperative form),
+is ideal for creating reusable contracts,
+so that the same conditions need not be specified several places with similar
+purpose. Using the above example, if several matrices need to be square and
+numeric, do:
+
+```{r eval=FALSE}
+ensure_square_numeric <- 
+  ensures_that(NCOL(.) == NROW(.),
+               is.numeric(.))
+
+m1 <- get_matrix()       %>% ensure_square_numeric
+m2 <- get_other_matrix() %>% ensure_square_numeric
+```
+
+Note how the present tense form, "ensure**s** that", and the imperative form, 
+"ensure that" makes the statements very much like regular sentences.
+
+It is straight forward to combine contracts made with `ensures_that` with 
+on-the-fly additional conditions:
+
+```{r eval=FALSE}
+m3 <-
+  get_matrix() %>%
+  ensure_square_numeric %>%
+  ensure_that(all(. < 10))
+```
+
+However, note that conditions stated in the same `ensure*` call are all 
+checked, i.e. in the following example the error received is not the same:
+
+```{r eval=FALSE}
+# Only the first error is recorded.
+letters %>%
+  ensure_that(length(.) == 10) %>%
+  ensure_that(all(. == toupper(.)))
+
+# Both errors are recorded.
+letters %>%
+  ensure_that(length(.) == 10,
+              all(. == toupper(.)))
+```
+
+Sometimes it is useful to *check* whether a contract is satisfied, without
+*ensuring* that it is. For this purpose there is a function `check_that` which
+works like `ensure_that` but will return a logical indication of success:
+```{r eval=FALSE}
+if (check_that(my_sequence, is.numeric))
+  message("Success!")
+```
+
+# Naming arguments
+It is possible to assign names for use in the conditions, such that no
+external variable declaration is needed for additional information needed
+in the conditions. This can be used to make the code more readable, or
+to avoid the same computation twice. To assign a value in the `ensure(s)_that`
+call, simply use named arguments (and avoid `fail_with` and `err_desc`):
+```{r, eval = FALSE}
+some_object <- 
+  some_computation() %>%
+  ensure_that(foo(a, .) == bar(a, .), a = baz(x, y, z))
+```
+
+# Adding existing contracts to new contracts
+Sometimes it is useful to have a set of contracts for different purposes,
+and combine them in situations where more than one of them apply.
+As described above, one can chain together multiple `ensure_that` 
+statements, but in that situation `ensurer` will not check all conditions
+from all contracts. Another option is to add existing contracts, constructed
+with `ensures_that` to a new `ensure(s)_that` call. To let `ensurer` 
+know that the argument is an existing contract to be added, use a unary 
+`+` operator:
+```{r, eval = FALSE}
+matrix_is_square <- ensures_that(NROW(.) == NCOL(.))
+all_positive     <- ensures_that(all(. > 0))
+
+
+matrix(runif(16), 4, 4) %>% 
+  ensure(+matrix_is_square, +all_positive)
+```
+Any named arguments in an added contract will also be available in the
+new contract.
+
+# Customizing individual condition messages
+To make the description of each of the failed conditions more user-friendly
+and readable, `ensurer` lets you specify a description to conditions
+where the code is not transparent enough. To do this use a formula as
+condition: `condition ~ "message if fails"`. As an example:
+```{r, eval = FALSE}
+ensure_character <- 
+  ensures_that(is.character(.) ~ "vector must be of character type.")
+
+1:10 %>% ensure_character
+
+Error: conditions failed for call '1:10 %>% ensure_character':
+   * vector must be of character type. 
+```
+
+# Ensuring function return values
+The `ensures_that` function also provides a useful mechanism for ensuring 
+the characteristics of function return values. This will both make functions 
+safer, but will also provide users with specific knowledge about what they
+can expect of your functions. Here are a few pseudo examples:
+
+```{r eval=FALSE}
+`: numeric` <- ensures_that(is.numeric(.))
+
+get_quote <- function(ticker) `: numeric`({
+  # some code that extracts latest quote for the ticker
+})
+
+
+`: square matrix` <- ensures_that(is.numeric(.),
+                                  is.matrix(.),
+                                  NCOL(.) == NROW(.))
+                                  
+var_covar <- function(vec) `: square matrix`({
+  # some code that produces a variance-covariance matrix.
+})                                 
+```
+
+While the naming convention used above is not necessary, it is expressive
+when used for this purpose; but there is nothing different about the 
+contracts produced by `ensures_that`. Of course, another more standard option 
+is to ensure the return value at the end of the function, yet this won't 
+be as transparent to the user of the function.
+
+# Controlling failure
+The main purpose of the `ensurer` is to ensure that values are as they are
+expected, and if not alert the stakeholder(s) immediately. The default
+behavior is therefore to raise an error. There could be several reasons 
+to overrule this default, e.g. you may wish to send an email on error, or
+you might want to accept some default value if the desired value is not
+available.
+
+The `ensurer` has a simple mechanism for changing the behavior by 
+specifying the argument `fail_with` to `ensure_that` or 
+`ensures_that`. It is possible to pass in a static value which will be returned
+(e.g. an empty `data.frame` with the correct columns, or maybe even just
+`NA`). More often, however, more dynamic behavior is needed, and for 
+this on passes a function of a single argument, which will be applied
+to a `simpleError` object (the one that is raised by default):
+
+```{r eval=FALSE}
+square_failure <- function(e)
+{
+	# suppose you had an email function:
+	email("maintainer@company.com", subject = "error", body = e$message)
+	stop(e)
+}
+
+m1 <- 
+  get_matrix() %>% 
+  ensure_that(
+      NCOL(.) == NROW(.),
+      is.numeric(.),
+      fail_with = square_failure)
+
+m2 <-
+  get_matrix() %>% 
+  ensure_that(
+      NCOL(.) == NROW(.),
+      is.numeric(.),
+      fail_with = diag(10))
+```
+
+In some instances you may want to use the value itself in the error handler,
+although you don't know anything about it, except that it does not comply
+with the conditions. 
+Therefore this should be done with care, and currently there is not direct
+access to it (as you may need to think twice before doing it.) In the above 
+example, the `square_failure` does not know about `.`, although you can 
+fetch it using `get`:
+
+```{r eval=FALSE}
+square_failure <- function(e)
+{
+  # fetch the dot.
+  . <- get(".", parent.frame())
+  
+  # compose a message detailing also the class of the object returned.
+  msg <- 
+    sprintf("Here is what I know:\n%s\nValue class: %s.",
+            e$message, 
+            class(.) %>% paste(collapse = ", ")) # there could be several.
+  
+  # suppose you had an email function:
+  email("maintainer@company.com", subject = "error", body = msg)
+  
+  stop(e)
+}
+```
+
+It is also possible to use the dot, `.`, directly in anonymous error handlers
+defined directly in the call to e.g. `ensure_that`.
+
+One can add a description to the error message without having to specify 
+an error function, which can be useful if the same conditions are used 
+several places in your code, or simply to add some information to the 
+user about what could be the cause of the problem. This is done by 
+specifying the named argument `err_desc`.
+For example, `RODBC`'s `sqlQuery` returns a `data.frame` on success
+and a character string on failure. Suppose you have a function which makes use
+of this to fetch some results, and you wish to make your function safe using
+the `ensurer`:
+
+```{r eval=FALSE}
+`: sql result` <- 
+    ensures_that(is.data.frame(.),
+                 err_desc = "SQL error.")
+                 
+daily_results <- function(day) `: sql result`({
+    sql <- sprintf("SELECT * FROM RESULTS WHERE DAY = '%s'",
+                   format(as.Date(day)))
+    ch <- RODBC::odbcDriverConnect("connection_string")
+    on.exit(RODBC::odbcClose(ch))
+    RODBC::sqlQuery(ch, sql)
+})
+```
+
+The error would look like this:
+```{r, eval=FALSE}
+daily_results("2014-10-01")
+
+ Error: conditions failed for call 'daily_results("2014-10-01")':
+   * is.data.frame(.)
+ Description: SQL error. 
+```
+
+# Building on the ensurer functions
+In this section it is shown how simple extensions to the functionality 
+provided by the `ensurer` can be used to make flexible, yet strict,
+safety mechanisms.
+
+A common task is to load data from one or more external sources, 
+say from a SQL database, process the data, combine it various ways, and then
+produce some result or analysis. This may even be bundled up in a package and
+used by someone else who is unaware of the underlying data sources.
+If a connection is broken, a schema has changed, or if somehow the data does 
+not come out as expected, the software will probably suffer from both
+lack of results and some useless error messages. One step towards avoid such
+a scenario is to ensure that all data that are pulled into the application are
+as expected; i.e. provide some "type safety" to the data objects, 
+say `data.frame`s.
+
+Often you can gain a lot of security in your code if you can specify a 
+template for risky objects which specifies the necessary details of such objects.
+An obvious example is a `data.frame`: you may need to require specific names 
+and types of the columns and/or that it is non-empty. Maybe you have several
+important datasets that each are specific, yet all require the same type 
+of safety. Here is an example of how to specify a "template" and an ensuring 
+function that compares an object to such a template.
+
+```{r eval=FALSE}
+iris_template <- 
+  data.frame(
+    Sepal.Length = numeric(0),
+    Sepal.Width  = numeric(0),
+    Petal.Length = numeric(0),
+    Petal.Width  = numeric(0),
+    Species      = 
+        factor(numeric(0), levels = c("setosa", "versicolor", "virginica"))
+)
+
+ensure_as_template <- function(x, tpl)
+  ensure_that(x,
+    is.data.frame(.),
+    identical(class(.), class(tpl)),
+    identical(sapply(., class), sapply(tpl, class)),
+    identical(sapply(., levels), sapply(tpl, levels))
+  )
+
+iris %>% ensure_as_template(iris_template)
+```
+The `ensure_as_template` is general enough, to accept any other `data.frame`
+with a corresponding template. Packages that exposes functions which return
+`data.frames` could define such templates (internally or externally) and 
+ensure data validity this way.
+
+

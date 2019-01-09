@@ -1,0 +1,46 @@
+import(methods, grDevices, graphics, grid)
+importFrom("stats", 
+           "aggregate", "as.dendrogram", "coef", "density",
+           "dist", "dnorm", "dpois", "hclust", "lm", "pchisq",
+           "predict", "rnorm", "runif", "ts", "uniroot", "window")
+importFrom("utils", 
+           "capture.output", "data", "head", "read.csv", "read.table")
+importFrom("lattice",
+           "barchart", "canonical.theme", "cloud", "dotplot", "panel.abline", 
+           "panel.lmline", "panel.text", "panel.xyplot", "show.settings", 
+           "simpleKey", "strip.custom", "trellis.device", "trellis.par.set", 
+           "xyplot")
+importFrom("ggplot2",   
+           "aes", "coord_polar", "coord_trans", "facet_wrap", "geom_abline", 
+           "geom_bar", "geom_hline", "geom_line", "geom_point", "geom_smooth", 
+           "geom_text", "ggplot", 
+           "qplot", "scale_color_manual", "scale_fill_manual", 
+           "scale_shape_manual",
+           "scale_x_continuous", "scale_y_continuous", "stat_smooth", 
+           "theme", "theme_bw", "update_geom_defaults")
+exportPattern("figure")
+S3method("plot", "newclass")
+export("grid.imageFun")
+export("grid.ozFun")
+export("imageGrob")
+export("grid.imageGrob")
+S3method("validDetails", "imageGrob")
+S3method("validDetails", "ozGrob")
+export("ozGrob")
+export("grid.ozGrob")
+export("ozImage")
+S3method("drawDetails", "ozImage")
+S3method("editDetails", "imageGrob")
+S3method("editDetails", "ozGrob")
+export("ribbonLegend")
+S3method("widthDetails", "ribbonLegend")
+export("ozKey")
+export("splitString")
+export("splitTextGrob")
+S3method("drawDetails", "splitText")
+export("faceD")
+export("faceE")
+export("faceA")
+export("faceB")
+export("faceC")
+S3method("drawDetails", "face")

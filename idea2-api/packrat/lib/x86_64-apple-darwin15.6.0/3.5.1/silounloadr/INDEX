@@ -1,0 +1,20 @@
+calc_academic_year      Calculate School or Academic Year from date
+calc_ps_termid          Calculate PowerSchool TermId given first year
+                        of a school year
+connect_to_bq           Create connection to BigQuery warehouse and
+                        return object to global environment
+connect_to_db           Create connection to Silo warehouse and return
+                        object to global environment
+get_alumni              Collect table from Alumni mirror
+get_alumni_db           Collect table from Alumni BQ mirror
+get_deanslist           Collect tables from DeansList
+get_illuminate          Collect table from Alumni mirror
+get_illuminate_mirror   Collect table from Illuminate_mirror
+get_kb                  Collect table from Kickboard db
+get_nwea                Collect table from NWEA
+get_nwea_map            Collect table from 'nwea_map' dataset on Big
+                        Query
+get_parcc               Collect table from PARCC
+get_powerschool         Collect table from PowerSchool on Big Query
+get_ps                  Collect table from PowerSchool_mirror
+get_teachboost          Collect tables from TeachBoost

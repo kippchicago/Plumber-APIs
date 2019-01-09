@@ -1,0 +1,47 @@
+Authentication          R6 environment to store authentication
+                        credentials
+gar_api_generator       googleAuthR data fetch function generator
+gar_api_page            Takes a generated API function and lets you
+                        page through results
+gar_attach_auto_auth    Auto Authentication function for use within
+                        .onAttach
+gar_auth                Authorize 'googleAuthR'
+gar_auth_js             Shiny JavaScript Google Authorisation [Server
+                        Module]
+gar_auth_jsUI           Shiny JavaScript Google Authorisation [UI
+                        Module]
+gar_auth_service        JSON service account authentication
+gar_auto_auth           Perform auto authentication
+gar_batch               Turn a list of gar_fetch_functions into batch
+                        functions
+gar_batch_walk          Walk data through batches
+gar_cache_get_loc       Setup where to put cache
+gar_check_existing_token
+                        Check a token vs options
+gar_create_api_objects
+                        Create the API objects from the Discovery API
+gar_create_api_skeleton
+                        Create an API library skeleton
+gar_create_package      Create a Google API package
+gar_discovery_api       Get meta data details for specified Google API
+gar_discovery_apis_list
+                        Get a list of Google API libraries
+gar_gce_auth            Authenticate on Google Compute Engine
+gar_gce_auth_email      Get the service email via GCE metadata
+gar_set_client          Setup the clientId, clientSecret and scopes
+gar_shiny_auth          Create Authentication within Shiny's server.R
+gar_shiny_auth_url      Make a Google Authorisation URL for Shiny
+gar_shiny_login_ui      A login page for Shiny
+gar_shiny_ui            Create a Google login before your Shiny UI
+                        launches
+gar_token_info          Get current token summary
+googleAuth              Shiny Google Authorisation [Server Module]
+googleAuthR             googleAuthR: Easy Authentication with Google
+                        OAuth2 APIs
+googleAuthUI            Shiny Google Authorisation [UI Module]
+googleSignIn            Google SignIn [Server Module]
+googleSignInUI          Google SignIn [UI Module]
+silent_auth             Silent auth
+skip_if_no_env_auth     Skip test if not authenticated
+with_shiny              Turn a googleAuthR data fetch function into a
+                        Shiny compatible one

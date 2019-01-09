@@ -1,0 +1,14 @@
+api-dataset             BigQuery datasets
+api-job                 BigQuery job: retrieve metadata
+api-project             BigQuery project methods
+api-table               BigQuery tables
+bigquery                BigQuery DBI driver
+bigrquery-package       bigrquery: An Interface to Google's 'BigQuery'
+                        'API'
+bq_dataset              S3 classes that reference remote BigQuery
+                        datasets, tables and jobs
+bq_field                BiqQuery field (and fields) class
+bq_projects             List available projects
+bq_query                Submit query to BigQuery
+bq_table_download       Download table data
+src_bigquery            A BigQuery data source for dplyr.

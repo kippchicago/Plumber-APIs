@@ -1,0 +1,17 @@
+faceA                   Draw a face
+fluoro.predict          Predicted Surface of Fluorescence
+grid.imageFun           Draw an Image
+grid.imageGrob          Draw an Image
+grid.ozFun              Draw a Map of Australia
+hourlySpeed             Auckland Wind Data
+imageGrob               Create an Image
+ozGrob                  Create a Map of Australia
+ozImage                 Create an Image on a Map of Australia
+ozKey                   Create a Key for an ozImage
+ozTemp                  Temperatures for Australian Cities
+plot.newclass           A Traditional Graphics Function Template
+ribbonLegend            Create a Ribbon Legend
+splitString             Split text into multiple lines
+splitTextGrob           Split text into multiple lines
+wind9am                 Auckland Wind Data
+xmm                     X-ray Multi-Mirror space telescope

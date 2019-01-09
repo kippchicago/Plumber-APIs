@@ -1,0 +1,12 @@
+name: idea_dl_suspensions
+title: idea_dl_suspensions
+username: chrishaid
+account: chrishaid
+server: idea2.kippchicago.org
+hostUrl: https://idea2.kippchicago.org/__api__
+appId: 20
+bundleId: 72
+url: https://idea2.kippchicago.org/content/20/
+when: 1546532472.41327
+asMultiple: FALSE
+asStatic: FALSE

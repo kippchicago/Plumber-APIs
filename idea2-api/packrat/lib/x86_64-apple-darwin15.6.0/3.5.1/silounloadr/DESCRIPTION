@@ -1,0 +1,30 @@
+Package: silounloadr
+Title: Functions to convey and prep data from KIPP Chicago's Silo data
+        warehouse to an R session.
+Version: 0.0.1
+Authors@R: person("Chris", "Haid", email = "chaid@kippchicago.org", role = c("aut", "cre"))
+Description: Functions to convey and prep data from KIPP Chicago's Silo data
+    warehouse to an R session. This package allows KIPP Chicago data scientists to
+    retrieve tables from silo with single line function calls
+Depends: R (>= 3.2.2), dplyr
+License: MIT
+LazyData: true
+Imports: DBI, dbplyr, dplyr, lubridate, bigrquery, stringr, lazyeval,
+        odbc
+Remotes: hadley/dplyr, rstats-db/bigrquery
+RoxygenNote: 6.1.0
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: silounloadr
+RemoteUsername: kippchicago
+RemoteRef: master
+RemoteSha: 7c2f0c745ad9e82e044fa76ffc02d4466cd22930
+GithubRepo: silounloadr
+GithubUsername: kippchicago
+GithubRef: master
+GithubSHA1: 7c2f0c745ad9e82e044fa76ffc02d4466cd22930
+NeedsCompilation: no
+Packaged: 2018-11-20 20:46:50 UTC; chrishaid
+Author: Chris Haid [aut, cre]
+Maintainer: Chris Haid <chaid@kippchicago.org>
+Built: R 3.5.1; ; 2018-11-20 20:46:50 UTC; unix
