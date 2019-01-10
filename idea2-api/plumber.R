@@ -643,15 +643,15 @@ function(res){
              timeframe_end_date) %>%
     filter(calculated_at == max(calculated_at))
   
-  cat("Get DeansList Rosters")
-  file_list <- dir(path = here::here("/DL Rosters"), pattern = "1819", full.names = TRUE)
+  #cat("Get DeansList Rosters")
+  #file_list <- dir(path = here::here("/DL Rosters"), pattern = "1819", full.names = TRUE)
   
-  gradebook_df_list <- file_list %>%
-    map(read_csv) %>%
-    map(janitor::clean_names) %>%
-    map_df(bind_rows) %>%
-    mutate(sec_id = secondary_integration_id_at_load)
-  
+  # gradebook_df_list <- file_list %>%
+  #   map(read_csv) %>%
+  #   map(janitor::clean_names) %>%
+  #   map_df(bind_rows) %>%
+  #   mutate(sec_id = secondary_integration_id_at_load)
+  # 
   cat("Combining Gradebooks with sections, students tables")
   grades_gb_name <- overall_grades_recent %>%
     filter(!is.na(mark)) %>%
