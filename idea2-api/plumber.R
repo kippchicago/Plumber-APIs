@@ -17,7 +17,6 @@ library(mapvizieR)
 library(silounloadr)
 
 library(googlesheets)
-library(here)
 
 
 
