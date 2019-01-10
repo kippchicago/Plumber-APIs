@@ -16,6 +16,9 @@ library(forcats)
 library(mapvizieR)
 library(silounloadr)
 
+library(googlesheets)
+library(here)
+
 
 
 #* @apiTitle Data Prep Endpoints for IDEA2
@@ -472,3 +475,261 @@ function(res){
   res$status <- 200
   
 }
+
+
+#* Trigger Duplicate Grade Review prep script for IDEA
+#* @get /run_idea_grade_review
+function(res){
+  schools <- data_frame(schoolid = c(78102, 7810, 400146, 400163, 4001802, 400180, 4001632),
+                        schoolabbreviation =c("KAP", "KAMS", "KAC", "KBCP", "KOP", "KOA", "KBP"))
+  
+  cat("Get Students Table")
+  students <- get_powerschool("students") %>%
+    select(studentid = id,
+           student_number,
+           first_name, 
+           last_name,
+           grade_level,
+           home_room,
+           enroll_status,
+           schoolid) %>%
+    collect()
+  
+  cat("Get Enrollments Table")
+  enrollments <- get_powerschool("ps_enrollment_all") %>% 
+    select(studentid,
+           schoolid,
+           entrydate,
+           exitdate,
+           exitcode,
+           yearid) %>%
+    collect()
+  
+  cat("Calculate First Year and Term ID")
+  current_first_year <- calc_academic_year(lubridate::today(), 
+                                           format = "first_year") 
+  
+  ps_termid <- calc_ps_termid(current_first_year)
+  
+  cat("Idenitfy DNA students")
+  dna_students <- enrollments %>% 
+    filter(yearid == ps_termid/100) %>%
+    mutate(exitdate = as_date(exitdate)) %>%
+    group_by(schoolid,
+             studentid) %>%
+    filter(exitdate == min(exitdate)) %>% 
+    mutate(dna = exitdate %in% as_date("2018-08-20") | #Use Sys Env First Day??
+             exitcode == 99)
+  
+  cat("Get CC Table")
+  cc_unique <- cc %>%
+    filter(termid %in% c(ps_termid, (-1*ps_termid))) %>%
+    select(course_number,
+           section_number,
+           sectionid) %>%
+    unique()
+  
+  cat("Calculate Second Year")
+  current_last_year <- calc_academic_year(today(), format = "second_year")
+  
+  cat("Get Gradebooks Table")
+  gradebooks <- get_illuminate("gradebooks", schema = "gradebook") %>% 
+    filter(academic_year == current_last_year) %>%
+    select(gradebook_id,
+           created_by,
+           gradebook_name,
+           active,
+           is_deleted,
+           academic_year) %>%
+    collect()
+  
+  cat("Get Illuminate Students Table")
+  ill_students <- get_illuminate("students", "public") %>%
+    select(student_id,
+           local_student_id) %>%
+    collect()
+  
+  cat("Get Gradebook Sections Table")
+  gradebook_sections <- get_illuminate("gradebook_section_course_aff", schema = "gradebook") %>%
+    select(gradebook_id,
+           ill_sec_id = section_id,
+           user_id) %>%
+    collect()
+  
+  cat("Get PS Terms Table")
+  terms <- get_powerschool("terms") %>%
+    filter(id >= ps_termid) %>%
+    select(id,
+           abbreviation,
+           firstday,
+           lastday,
+           schoolid) %>%
+    collect()
+  
+  cat("Get Illuminate Sections Table")
+  illuminate_sec <- get_illuminate("sections",
+                                   "public") %>% 
+    select(ill_sec_id = section_id,
+           ps_sec_id = local_section_id) %>% 
+    collect()
+  
+  cat("Find current SY quarter terms")
+  current_q_dates <- terms %>%
+    select(-schoolid) %>%
+    filter(grepl("Q", abbreviation)) %>%
+    mutate(q_number = stringr::str_extract(abbreviation, "\\d")) %>%
+    group_by(q_number, 
+             firstday, 
+             lastday) %>%
+    summarise() %>%
+    as.data.frame() %>%
+    mutate(q_interval = lubridate::interval(firstday, lastday))
+  
+  q_dates_no_interval <- current_q_dates %>%
+    select(-q_interval)
+  
+  cat("Identify last day of school")
+  last_school_day <- q_dates_no_interval %>% 
+    dplyr::filter(q_number == 4) %>%
+    select(lastday)
+  
+  cat("Identify first day of school")
+  first_school_day <- q_dates_no_interval %>%
+    filter(q_number == 1) %>%
+    select(firstday)
+  
+  identify_quarter <- . %>%
+    purrr::map(function(x) x %within% current_q_dates$q_interval) %>% 
+    purrr::map(function(x) which(x)) %>%
+    as.double()
+  
+  cat("Identify current quarter and interval")
+  date_within_quarter <- today() %>%
+    identify_quarter()
+  
+  id_q_dates <- q_dates_no_interval %>%
+    filter(q_number %in% c(date_within_quarter - 1, date_within_quarter))
+  
+  if(date_within_quarter == 1){
+    past_q_firstday <- id_q_dates %>%
+      select(firstday)
+  } else {
+    past_q_firstday <- id_q_dates %>%
+      filter(q_number %in% c(date_within_quarter -1)) %>%
+      select(firstday)  
+  }
+  
+  current_q_lastday <- id_q_dates %>%
+    filter(q_number %in% date_within_quarter) %>%
+    select(lastday)
+  
+  cat("Get overall grades")
+  overall_grades <- get_illuminate("overall_score_cache", schema = "gradebook") %>%
+    filter(timeframe_end_date <= current_q_lastday$lastday,#date_within_quarter$lastday,
+           timeframe_start_date >= past_q_firstday$firstday) %>%
+    select(gradebook_id,
+           calculated_at,
+           mark,
+           percentage,
+           student_id,
+           timeframe_end_date,
+           timeframe_start_date) %>%
+    collect(n= Inf) 
+  
+  cat("Filter max calculated_at day/time")
+  overall_grades_recent <- overall_grades %>%
+    group_by(gradebook_id,
+             student_id,
+             timeframe_start_date,
+             timeframe_end_date) %>%
+    filter(calculated_at == max(calculated_at))
+  
+  cat("Get DeansList Rosters")
+  file_list <- dir(path = here::here("/DL Rosters"), pattern = "1819", full.names = TRUE)
+  
+  gradebook_df_list <- file_list %>%
+    map(read_csv) %>%
+    map(janitor::clean_names) %>%
+    map_df(bind_rows) %>%
+    mutate(sec_id = secondary_integration_id_at_load)
+  
+  cat("Combining Gradebooks with sections, students tables")
+  grades_gb_name <- overall_grades_recent %>%
+    filter(!is.na(mark)) %>%
+    left_join(gradebooks,
+              by = "gradebook_id") %>%
+    left_join(gradebook_df_list %>%
+                filter(!is.na(gradebook_name_at_load)) %>%
+                select(sec_id,
+                       gradebook_name_at_load),
+              by = c("gradebook_name" = "gradebook_name_at_load")) %>% 
+    left_join(ill_students %>%
+                mutate(student_number = as.double(local_student_id)),
+              by = "student_id")
+  
+  grades_sections <- grades_gb_name %>%
+    filter(!is_deleted) %>%
+    left_join(students,
+              by = "student_number") %>%
+    filter(grade_level > 3) %>%
+    left_join(cc_unique,
+              by = c("sec_id" = "sectionid"))
+  
+  cat("Identify previous and current classes")
+  students_sections <- students %>%
+    filter(enroll_status == 0,
+           grade_level > 3) %>%
+    left_join(cc %>%
+                select(dateenrolled,
+                       dateleft,
+                       sectionid,
+                       course_number,
+                       studentid),
+              by = "studentid") %>% 
+    filter(dateenrolled >= first_school_day$firstday) %>%
+    mutate(status = if_else(sectionid < 0, "Previous Class", "Current Class"))
+  
+  cat("Combining final gradebook table")
+  final_grade_data <- grades_sections %>%
+    left_join(schools,
+              by = "schoolid") %>%
+    left_join(students_sections %>%
+                mutate(abs_sec_id = abs(sectionid)) %>%
+                select(student_number,
+                       abs_sec_id,
+                       status,
+                       dateleft),
+              by = c("student_number",
+                     "sec_id" = "abs_sec_id")) %>% 
+    left_join(dna_students %>% 
+                select(studentid,
+                       schoolid,
+                       dna,
+                       dna_exitdate = exitdate),
+              by = c("studentid",
+                     "schoolid")) %>%
+    #some students came, left, then returned (and rostered to a new HR)
+    mutate(status0 = status,
+           status = if_else(is.na(status) & dna, "Previous Class", status0)) %>%
+    filter(enroll_status == 0,
+           active) %>% #filter for active == TRUE grade books
+    mutate(dna_exitdate = as_date(dna_exitdate),
+           dateleft = as_date(dateleft),
+           dateleft = if_else(is.na(dateleft) & dna, dna_exitdate, dateleft),
+           q_current = identify_quarter(timeframe_end_date),
+           dateleft = as_date(dateleft),
+           transfer = dateleft < last_school_day$lastday + days(1), #adding 1 day because Chris' has classes ending on 6/15 but enrollment ends 6/14
+           q_transfer = if_else(transfer, identify_quarter(dateleft), 0))
+  
+  cat("Homeroom table for shiny selection filter")
+  homerooms <- final_grade_data %>% #View()
+    ungroup() %>% 
+    select(schoolid, 
+           home_room) %>% 
+    unique() %>% #View()
+    mutate(grade_level = str_extract(home_room, "[4-8]")) %>%
+    left_join(schools,
+              by = "schoolid") %>%
+    mutate(grade_level = as.integer(grade_level))
+}
+
