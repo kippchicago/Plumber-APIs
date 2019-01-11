@@ -283,10 +283,14 @@ function(res){
   cat("Calcualte ADM")
   adm <- membership %>%
     collect() %>%
-    mutate(SY = sprintf("SY%s", 
+    mutate(month = fct_shift(month(calendardate, label = TRUE, abbr = TRUE), 7),
+            SY = sprintf("SY%s", 
                         calc_academic_year(calendardate, date_parser = lubridate::ymd, format = 'short'))) %>%
     group_by(schoolid, SY) %>%
-    summarize(adm = round(mean(N), 0))
+    mutate(adm = cummean(N)) %>%
+    group_by(schoolid, SY, month) %>%
+    filter(calendardate == max(calendardate))  
+    #summarize(adm = round(mean(N), 0))
   
   schools <- tibble::tribble(
     ~schoolid, ~school_name, ~combined_name, ~school_full_name,
@@ -342,7 +346,7 @@ function(res){
                         calc_academic_year(startdate, date_parser = lubridate::ymd_hms, format = 'short'))) %>%
     #filter(startdate >= ymd("2017-08-24")) %>%
     mutate(month_1 = month(startdate, label = TRUE, abbr = TRUE),
-           month = forcats::fct_inorder(as.character(month_1), ordered = TRUE)) %>%
+           month = fct_shift(month_1, 7)) %>%
     select(student_number,  
            student_first,
            student_last,
@@ -366,7 +370,7 @@ function(res){
     group_by(SY, school_name) %>%
     mutate(cum_susps = cumsum(N_susps)
     ) %>%
-    inner_join(adm, by = c("SY", "school_name")) %>%
+    inner_join(adm, by = c("SY", "school_name", "month")) %>%
     mutate(susp_rate = N_susps/adm*100,
            cum_susp_rate = cum_susps/adm*100)
   
