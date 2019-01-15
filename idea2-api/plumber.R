@@ -374,8 +374,6 @@ function(res){
     mutate(susp_rate = N_susps/adm*100,
            cum_susp_rate = cum_susps/adm*100)
   
-  
-  
   oss_2 <- oss %>% prep_susps
   
   
@@ -472,6 +470,9 @@ function(res){
                           iss_rates,
                           adm,
                           file = "dl_suspensions.Rda")
+  
+  cat("dl_suspensions.Rda saved to GCS")
+  
   
   res$status <- 200
   
