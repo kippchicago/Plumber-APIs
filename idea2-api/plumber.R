@@ -478,8 +478,20 @@ function(res){
 #* Trigger Duplicate Grade Review prep script for IDEA
 #* @get /run_idea_grade_review
 function(res){
-  schools <- data_frame(schoolid = c(78102, 7810, 400146, 400163, 4001802, 400180, 4001632),
-                        schoolabbreviation =c("KAP", "KAMS", "KAC", "KBCP", "KOP", "KOA", "KBP"))
+  schools <- data_frame(schoolid = c(78102, 
+                                     7810, 
+                                     400146, 
+                                     400163, 
+                                     4001802, 
+                                     400180, 
+                                     4001632),
+                        schoolabbreviation =c("KAP", 
+                                              "KAMS", 
+                                              "KAC", 
+                                              "KBCP", 
+                                              "KOP", 
+                                              "KOA", 
+                                              "KBP"))
   
   cat("Get Students Table")
   students <- get_powerschool("students") %>%
@@ -680,7 +692,7 @@ function(res){
     filter(!ill_sec_id %in% c(4379, #4th Attendance
                               4501, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
                               4496, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
-                              4502))
+                              4502)) #4th PE (all 4 sections in 1 gradebook, dupes not needed)
   
   cat("Identify previous and current classes")
   students_sections <- students %>%
