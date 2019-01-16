@@ -731,7 +731,7 @@ function(res){
     mutate(status0 = status,
            status = if_else(is.na(status) & dna, "Previous Class", status0)) %>%
     filter(enroll_status == 0,
-           active) %>% #filter for active == TRUE grade books
+           active) %>% 
     mutate(dna_exitdate = as_date(dna_exitdate),
            dateleft = as_date(dateleft),
            dateleft = if_else(is.na(dateleft) & dna, dna_exitdate, dateleft),
@@ -741,11 +741,11 @@ function(res){
            q_transfer = if_else(transfer, identify_quarter(dateleft), 0))
   
   cat("Homeroom table for shiny selection filter")
-  homerooms <- final_grade_data %>% #View()
+  homerooms <- final_grade_data %>% 
     ungroup() %>% 
     select(schoolid, 
            home_room) %>% 
-    unique() %>% #View()
+    unique() %>% 
     mutate(grade_level = str_extract(home_room, "[4-8]")) %>%
     left_join(schools,
               by = "schoolid") %>%
