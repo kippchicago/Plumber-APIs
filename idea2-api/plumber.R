@@ -16,7 +16,6 @@ library(forcats)
 library(mapvizieR)
 library(silounloadr)
 
-library(googlesheets)
 
 
 
@@ -521,6 +520,9 @@ function(res){
              exitcode == 99)
   
   cat("Get CC Table")
+  cc <- get_powerschool("cc") %>%
+    collect()
+  
   cc_unique <- cc %>%
     filter(termid %in% c(ps_termid, (-1*ps_termid))) %>%
     select(course_number,
@@ -570,6 +572,14 @@ function(res){
                                    "public") %>% 
     select(ill_sec_id = section_id,
            ps_sec_id = local_section_id) %>% 
+    collect()
+  
+  cat("Get Illuminate Teacher Sections Table")
+  illuminate_teacher_sec <- get_illuminate("section_teacher_aff",
+                                           schema = "public") %>%
+    select(ill_sec_id = section_id,
+           sec_user = user_id,
+           primary_teacher) %>%
     collect()
   
   cat("Find current SY quarter terms")
@@ -624,7 +634,7 @@ function(res){
   
   cat("Get overall grades")
   overall_grades <- get_illuminate("overall_score_cache", schema = "gradebook") %>%
-    filter(timeframe_end_date <= current_q_lastday$lastday,#date_within_quarter$lastday,
+    filter(timeframe_end_date <= current_q_lastday$lastday,
            timeframe_start_date >= past_q_firstday$firstday) %>%
     select(gradebook_id,
            calculated_at,
@@ -643,36 +653,34 @@ function(res){
              timeframe_end_date) %>%
     filter(calculated_at == max(calculated_at))
   
-  #cat("Get DeansList Rosters")
-  #file_list <- dir(path = here::here("/DL Rosters"), pattern = "1819", full.names = TRUE)
-  
-  # gradebook_df_list <- file_list %>%
-  #   map(read_csv) %>%
-  #   map(janitor::clean_names) %>%
-  #   map_df(bind_rows) %>%
-  #   mutate(sec_id = secondary_integration_id_at_load)
-  # 
+
+
   cat("Combining Gradebooks with sections, students tables")
   grades_gb_name <- overall_grades_recent %>%
     filter(!is.na(mark)) %>%
     left_join(gradebooks,
               by = "gradebook_id") %>%
-    left_join(gradebook_df_list %>%
-                filter(!is.na(gradebook_name_at_load)) %>%
-                select(sec_id,
-                       gradebook_name_at_load),
-              by = c("gradebook_name" = "gradebook_name_at_load")) %>% 
+    left_join(gradebook_sections %>%
+                unique(),
+              by = c("gradebook_id",
+                     "created_by" = "user_id")) %>%
+    left_join(illuminate_sec,
+              by = "ill_sec_id") %>%
     left_join(ill_students %>%
                 mutate(student_number = as.double(local_student_id)),
               by = "student_id")
   
   grades_sections <- grades_gb_name %>%
-    filter(!is_deleted) %>%
+    mutate(ps_sec_id = as.integer(ps_sec_id)) %>%
     left_join(students,
               by = "student_number") %>%
     filter(grade_level > 3) %>%
     left_join(cc_unique,
-              by = c("sec_id" = "sectionid"))
+              by = c("ps_sec_id" = "sectionid")) %>%
+    filter(!ill_sec_id %in% c(4379, #4th Attendance
+                              4501, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
+                              4496, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
+                              4502))
   
   cat("Identify previous and current classes")
   students_sections <- students %>%
@@ -699,7 +707,7 @@ function(res){
                        status,
                        dateleft),
               by = c("student_number",
-                     "sec_id" = "abs_sec_id")) %>% 
+                     "ps_sec_id" = "abs_sec_id")) %>% 
     left_join(dna_students %>% 
                 select(studentid,
                        schoolid,
@@ -730,5 +738,14 @@ function(res){
     left_join(schools,
               by = "schoolid") %>%
     mutate(grade_level = as.integer(grade_level))
+  
+  cat("Saving to GCS")
+  gcs_global_bucket("idea_grade_review")
+  
+  gcs_results <- gcs_save(final_grade_data,
+                          homerooms,
+                          file = "ill_grade_review.Rda")
+  
+  res$status <- 200
 }
 
