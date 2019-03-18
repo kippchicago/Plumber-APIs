@@ -720,11 +720,13 @@ function(res){
   
   cat("Combining final gradebook table")
   final_grade_data <- grades_sections %>%
+    select(-grade_level) %>% 
     left_join(schools,
               by = "schoolid") %>%
     left_join(students_sections %>%
                 mutate(abs_sec_id = abs(sectionid)) %>%
                 select(student_number,
+                       grade_level,
                        abs_sec_id,
                        status,
                        dateleft),
@@ -753,13 +755,13 @@ function(res){
   cat("Homeroom table for shiny selection filter")
   homerooms <- final_grade_data %>% 
     ungroup() %>% 
+    filter(!is.na(grade_level)) %>% 
     select(schoolid, 
-           home_room) %>% 
+           home_room,
+           grade_level) %>% 
     unique() %>% 
-    mutate(grade_level = str_extract(home_room, "[4-8]")) %>%
     left_join(schools,
-              by = "schoolid") %>%
-    mutate(grade_level = as.integer(grade_level))
+              by = "schoolid")
   
   cat("Saving to GCS")
   gcs_global_bucket("idea_grade_review")
