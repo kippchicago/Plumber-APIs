@@ -538,7 +538,8 @@ function(res){
   
   cat("Get CC Table")
   cc <- get_powerschool("cc") %>%
-    filter(termid %in% c(ps_termid, (-1*ps_termid))) %>%
+    filter(termid == ps_termid |
+             termid == (-1*ps_termid)) %>%
     collect()
   
   cc_filter <- cc %>%
