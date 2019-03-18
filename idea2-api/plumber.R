@@ -701,7 +701,8 @@ function(res){
     filter(!ill_sec_id %in% c(4379, #4th Attendance
                               4501, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
                               4496, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
-                              4502)) #4th PE (all 4 sections in 1 gradebook, dupes not needed)
+                              4502),  #4th PE (all 4 sections in 1 gradebook, dupes not needed)
+           !is_deleted)
   
   cat("Identify previous and current classes")
   students_sections <- students %>%
