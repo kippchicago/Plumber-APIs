@@ -538,10 +538,15 @@ function(res){
   
   cat("Get CC Table")
   cc <- get_powerschool("cc") %>%
+    filter(termid %in% c(ps_termid, (-1*ps_termid))) %>%
     collect()
   
+  cc_filter <- cc %>%
+    select(sectionid, 
+           schoolid_cc = schoolid) %>%
+    unique()
+  
   cc_unique <- cc %>%
-    filter(termid %in% c(ps_termid, (-1*ps_termid))) %>%
     select(course_number,
            section_number,
            sectionid) %>%
@@ -691,18 +696,17 @@ function(res){
     mutate(ps_sec_id = as.integer(ps_sec_id)) %>%
     left_join(students,
               by = "student_number") %>%
-    filter(grade_level > 3) %>%
     left_join(cc_unique,
               by = c("ps_sec_id" = "sectionid")) %>%
     filter(!ill_sec_id %in% c(4379, #4th Attendance
                               4501, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
                               4496, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
-                              4502)) #4th PE (all 4 sections in 1 gradebook, dupes not needed)
+                              4502),  #4th PE (all 4 sections in 1 gradebook, dupes not needed)
+           !is_deleted)
   
   cat("Identify previous and current classes")
   students_sections <- students %>%
-    filter(enroll_status == 0,
-           grade_level > 3) %>%
+    filter(enroll_status == 0) %>%
     left_join(cc %>%
                 select(dateenrolled,
                        dateleft,
@@ -762,7 +766,7 @@ function(res){
   gcs_results <- gcs_save(final_grade_data,
                           homerooms,
                           q_dates_no_interval,
-                          cc,
+                          cc_filter,
                           file = "ill_grade_review.Rda")
   
   res$status <- 200
