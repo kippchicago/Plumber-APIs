@@ -485,14 +485,16 @@ function(res){
 function(res){
   schools <- data_frame(schoolid = c(78102, 
                                      7810, 
-                                     400146, 
-                                     400163, 
+                                     400146,
+                                     4001462,
+                                     400163,
                                      4001802, 
                                      400180, 
                                      4001632),
                         schoolabbreviation =c("KAP", 
                                               "KAMS", 
-                                              "KAC", 
+                                              "KAC",
+                                              "KACP",
                                               "KBCP", 
                                               "KOP", 
                                               "KOA", 
@@ -533,7 +535,7 @@ function(res){
     group_by(schoolid,
              studentid) %>%
     filter(exitdate == min(exitdate)) %>% 
-    mutate(dna = exitdate %in% as_date("2018-08-20") | #Use Sys Env First Day??
+    mutate(dna = exitdate %in% as_date("2019-08-19") | #Use Sys Env First Day??
              exitcode == 99)
   
   cat("Get CC Table")
@@ -548,13 +550,15 @@ function(res){
     unique()
   
   cc_unique <- cc %>%
+    filter(termid %in% c(ps_termid, (-1*ps_termid))) %>%
     select(course_number,
            section_number,
            sectionid) %>%
     unique()
   
   cat("Calculate Second Year")
-  current_last_year <- calc_academic_year(today(), format = "second_year")
+  current_last_year <- calc_academic_year(today(), 
+                                          format = "second_year")
   
   cat("Get Gradebooks Table")
   gradebooks <- get_illuminate("gradebooks", schema = "gradebook") %>% 
@@ -639,6 +643,12 @@ function(res){
   date_within_quarter <- today() %>%
     identify_quarter()
   
+  if(is.na(date_within_quarter)) {
+    date_first_day <- ymd(first_school_day$firstday)
+    date_within_quarter <- date_first_day %>%
+      identify_quarter()
+  }
+  
   id_q_dates <- q_dates_no_interval %>%
     filter(q_number %in% c(date_within_quarter - 1, date_within_quarter))
   
@@ -655,10 +665,13 @@ function(res){
     filter(q_number %in% date_within_quarter) %>%
     select(lastday)
   
+  past_firstday <- past_q_firstday$firstday
+  current_lastday <- current_q_lastday$lastday
+  
   cat("Get overall grades")
   overall_grades <- get_illuminate("overall_score_cache", schema = "gradebook") %>%
-    filter(timeframe_end_date <= current_q_lastday$lastday,
-           timeframe_start_date >= past_q_firstday$firstday) %>%
+    filter(timeframe_end_date <= current_lastday,
+           timeframe_start_date >= past_firstday) %>%
     select(gradebook_id,
            calculated_at,
            mark,
@@ -668,7 +681,8 @@ function(res){
            timeframe_start_date) %>%
     collect(n= Inf) 
   
-  cat("Filter max calculated_at day/time")
+  
+cat("Filter max calculated_at day/time")
   overall_grades_recent <- overall_grades %>%
     group_by(gradebook_id,
              student_id,

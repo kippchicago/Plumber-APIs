@@ -3,12 +3,13 @@ Type: Package
 Title: 'Rapidjson' C++ Header Files
 Version: 1.1
 Date: 2018-09-22
-Authors@R: c(
-    person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre")),
-    person("Milo", "Yip", , role = "ctb", comment = "Author of c++ rapidjson library, provided through THL A29 Limited, a Tencent company"),
-    person("Alexander", "Chemeris", role = "ctb", comment = "Author of c++ msinttypes library")
-    )
-Description: Provides JSON parsing capability through the 'Rapidjson' 'C++' header-only library. 
+Authors@R: c( person("David", "Cooley", ,"dcooley@symbolix.com.au",
+    role = c("aut", "cre")), person("Milo", "Yip", , role = "ctb",
+    comment = "Author of c++ rapidjson library, provided through THL
+    A29 Limited, a Tencent company"), person("Alexander", "Chemeris",
+    role = "ctb", comment = "Author of c++ msinttypes library") )
+Description: Provides JSON parsing capability through the 'Rapidjson'
+    'C++' header-only library.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -16,11 +17,14 @@ RoxygenNote: 6.0.1
 SystemRequirements: GNU make
 NeedsCompilation: no
 Packaged: 2018-09-22 06:52:55 UTC; dave
-Author: David Cooley [aut, cre],
-  Milo Yip [ctb] (Author of c++ rapidjson library, provided through THL
-    A29 Limited, a Tencent company),
-  Alexander Chemeris [ctb] (Author of c++ msinttypes library)
+Author: David Cooley [aut, cre], Milo Yip [ctb] (Author of c++
+    rapidjson library, provided through THL A29 Limited, a Tencent
+    company), Alexander Chemeris [ctb] (Author of c++ msinttypes
+    library)
 Maintainer: David Cooley <dcooley@symbolix.com.au>
 Repository: CRAN
 Date/Publication: 2018-09-22 07:10:04 UTC
 Built: R 3.5.0; ; 2018-09-25 19:26:36 UTC; unix
+InstallAgent: packrat 0.5.0
+InstallSource: CRAN
+Hash: f80e5b78f7c98259e8cced9ba950d93b
