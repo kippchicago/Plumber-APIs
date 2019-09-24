@@ -4,8 +4,9 @@ Title: Ensure Values at Runtime
 Version: 1.1
 Author: Stefan Milton Bache
 Maintainer: Stefan Milton Bache <stefan@stefanbache.dk>
-Description: Add simple runtime contracts to R values. These ensure that values
-    fulfil certain conditions and will raise appropriate errors if they do not.
+Description: Add simple runtime contracts to R values. These ensure
+    that values fulfil certain conditions and will raise appropriate
+    errors if they do not.
 License: MIT + file LICENSE
 Suggests: magrittr, testthat, knitr
 VignetteBuilder: knitr
@@ -17,3 +18,6 @@ Packaged: 2015-04-21 19:08:43 UTC; shb
 Repository: CRAN
 Date/Publication: 2015-04-21 23:45:48
 Built: R 3.5.0; ; 2018-04-23 08:11:55 UTC; unix
+InstallAgent: packrat 0.5.0
+InstallSource: CRAN
+Hash: 04bb9ca11dcf684e0d6f1171b84b0cb8

@@ -19,5 +19,9 @@ NeedsCompilation: yes
 Packaged: 2017-12-10 22:04:42 UTC; hadley
 Repository: CRAN
 Date/Publication: 2017-12-11 16:47:57 UTC
-Built: R 3.5.0; x86_64-apple-darwin15.6.0; 2018-04-23 22:34:08 UTC; unix
+Built: R 3.5.0; x86_64-apple-darwin15.6.0; 2018-04-23 22:34:08 UTC;
+    unix
 Archs: reshape2.so.dSYM
+InstallAgent: packrat 0.5.0
+InstallSource: CRAN
+Hash: c950c8ac85b81209635acb3ce21b4cce

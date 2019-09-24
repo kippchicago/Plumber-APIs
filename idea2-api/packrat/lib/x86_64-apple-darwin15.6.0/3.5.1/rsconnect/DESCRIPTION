@@ -2,7 +2,7 @@ Package: rsconnect
 Type: Package
 Title: Deployment Interface for R Markdown Documents and Shiny
         Applications
-Version: 0.8.10
+Version: 0.8.13
 Author: JJ Allaire
 Maintainer: Jonathan McPherson <jonathan@rstudio.com>
 Description: Programmatic deployment interface for 'RPubs', 'shinyapps.io', and
@@ -12,14 +12,11 @@ Depends: R (>= 3.0.0)
 Imports: openssl, RCurl, jsonlite, packrat (>= 0.4.8-1), yaml (>=
         2.1.5), rstudioapi (>= 0.5)
 Suggests: knitr, testthat, rmarkdown (>= 1.1), plumber (>= 0.3.2),
-        shiny, sourcetools, xtable
+        reticulate, shiny, sourcetools, xtable
 License: GPL-2
-RoxygenNote: 6.1.0
-Roxygen: list(markdown = TRUE)
-GithubRepo: rsconnect
-GithubUsername: rstudio
-GithubRef: master
-GithubSHA1: 9916ccc664fc7571c800cbb51e2989858214e32c
-Origin: RStudioIDE
-Packaged: 2018-11-09 22:35:06 UTC; vagrant
-Built: R 3.5.1; ; 2018-11-20 22:26:00 UTC; unix
+RoxygenNote: 6.1.1
+NeedsCompilation: no
+Packaged: 2019-01-10 19:15:46 UTC; jmcphers
+Repository: CRAN
+Date/Publication: 2019-01-10 19:50:03 UTC
+Built: R 3.5.2; ; 2019-01-11 05:35:49 UTC; unix
