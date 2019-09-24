@@ -63,9 +63,9 @@ function(res){
   
   cat("Setting variables")
   
-  schools <- data_frame(schoolid = c(78102, 7810, 400146, 4001632, 400163, 4001802, 400180),
-                        schoolname = c("Ascend Primary", "Ascend Middle", "Academy", "Bloom Primary",  "Bloom", "One Primary", "One Academy"),
-                        schoolabbreviation =c("KAP", "KAMS", "KAC", "KBP", "KBCP", "KOP", "KOA"))
+  schools <- data_frame(schoolid = c(78102, 7810, 4001462, 400146, 4001632, 400163, 4001802, 400180),
+                        schoolname = c("Ascend Primary", "Ascend Middle", "Academy Primary", "Academy", "Bloom Primary",  "Bloom", "One Primary", "One Academy"),
+                        schoolabbreviation =c("KAP", "KAMS", "KACP", "KAC", "KBP", "KBCP", "KOP", "KOA"))
   
   first_four_years_ago <- floor_date(ymd(first_day) - years(4), unit = "week") %>%
     as.character() 
@@ -197,7 +197,7 @@ function(res){
     as_tibble() %>% # fixes grouping issue (Groups = [?], which is not the same as non groups)
     inner_join(map_mv_15$roster %>%
                  ungroup() %>%
-                 filter(implicit_cohort >= 2023) %>%
+                 filter(implicit_cohort >= 2024) %>%
                  select(termname, studentid, studentlastname,
                         studentfirstname, implicit_cohort, year_in_district),
                by = c("termname",  "studentid")) %>% 
@@ -276,7 +276,7 @@ function(res){
   ps_md <-get_powerschool('ps_membership_reg') 
   
   membership <- ps_md %>%
-    filter(calendardate >= "2017-08-19") %>%
+    filter(calendardate >= "2018-08-15") %>%
     group_by(schoolid, calendardate) %>%
     summarize(N = n()) 
   
@@ -296,6 +296,7 @@ function(res){
     ~schoolid, ~school_name, ~combined_name, ~school_full_name,
     78102, "KAP", "Ascend", "KIPP Ascend Primary",
     7810,  "KAMS", "Ascend", "KIPP Ascend Middle",
+    4001462, "KACP", "Academy", "KIPP Academy Chicago Primary",
     400146, "KAC", "Academy", "KIPP Academy Chicago",
     4001632, "KBP", "Bloom", "KIPP Bloom Primary",
     400163, "KBCP", "Bloom", "KIPP Bloom College Prep",
