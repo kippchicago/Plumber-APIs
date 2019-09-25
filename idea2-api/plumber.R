@@ -620,7 +620,6 @@ function(res){
   
   cat("Find current SY quarter terms")
   current_q_dates <- terms %>%
-    select(-schoolid) %>%
     filter(grepl("Q", abbreviation)) %>%
     mutate(q_number = stringr::str_extract(abbreviation, "\\d")) %>%
     group_by(q_number, 
