@@ -4,7 +4,6 @@
 # endpoint is called by Airflow 
 
 library(plumber)
-
 library(dplyr)
 library(lubridate)
 library(purrr)
@@ -12,7 +11,6 @@ library(stringr)
 library(googleCloudStorageR)
 library(janitor)
 library(forcats)
-
 library(mapvizieR)
 library(silounloadr)
 
@@ -485,22 +483,15 @@ function(res){
 #* Trigger Duplicate Grade Review prep script for IDEA
 #* @get /run_idea_grade_review
 function(res){
-  schools <- data_frame(schoolid = c(78102, 
-                                     7810, 
-                                     400146,
-                                     4001462,
-                                     400163,
-                                     4001802, 
-                                     400180, 
-                                     4001632),
-                        schoolabbreviation =c("KAP", 
-                                              "KAMS", 
-                                              "KAC",
-                                              "KACP",
-                                              "KBCP", 
-                                              "KOP", 
-                                              "KOA", 
-                                              "KBP"))
+  schools <- tribble(~"schoolid", ~"schoolabbreviation",
+                     78102, "KAP",
+                     7810, "KAMS",
+                     400146, "KAC",
+                     400163, "KBCP",
+                     4001802, "KOP",
+                     400180, "KOA",
+                     4001632, "KBP",
+                     4001462, "KACP")
   
   cat("Get Students Table")
   students <- get_powerschool("students") %>%
@@ -524,20 +515,40 @@ function(res){
            yearid) %>%
     collect()
   
-  cat("Calculate First Year and Term ID")
+  cat("Calculate First Year, Short Year, and Term ID")
   current_first_year <- calc_academic_year(lubridate::today(), 
                                            format = "first_year") 
   
+  current_short_year <- calc_academic_year(lubridate::today(),
+                                           format = "short")
+  
   ps_termid <- calc_ps_termid(current_first_year)
+  
+  year_id <- ps_termid/100
+  
+  cat("Get Terms - unique")
+  terms <- get_powerschool("terms") %>%
+    filter(id >= ps_termid) %>%
+    select(id,
+           abbreviation,
+           firstday,
+           lastday) %>%
+    collect()  %>% 
+    unique()
+  
+  cat("Identify first day of school")
+  first_day <- terms %>% 
+    filter(abbreviation == current_short_year) %>% 
+    pull(firstday)
   
   cat("Idenitfy DNA students")
   dna_students <- enrollments %>% 
-    filter(yearid == ps_termid/100) %>%
+    filter(yearid == year_id) %>%
     mutate(exitdate = as_date(exitdate)) %>%
     group_by(schoolid,
              studentid) %>%
     filter(exitdate == min(exitdate)) %>% 
-    mutate(dna = exitdate %in% as_date("2019-08-19") | #Use Sys Env First Day??
+    mutate(dna = exitdate == first_day |
              exitcode == 99)
   
   cat("Get CC Table")
@@ -580,21 +591,18 @@ function(res){
     collect()
   
   cat("Get Gradebook Sections Table")
-  gradebook_sections <- get_illuminate("gradebook_section_course_aff", schema = "gradebook") %>%
-    select(gradebook_id,
+  gradebook_sections_0 <- get_illuminate("gradebook_section_course_aff", schema = "gradebook") %>%
+    select(date_sync = `_fivetran_synced`,
+           gradebook_id,
            ill_sec_id = section_id,
            user_id) %>%
     collect()
   
-  cat("Get PS Terms Table")
-  terms <- get_powerschool("terms") %>%
-    filter(id >= ps_termid) %>%
-    select(id,
-           abbreviation,
-           firstday,
-           lastday,
-           schoolid) %>%
-    collect()
+  gradebook_sections <- gradebook_sections_0 %>% 
+    group_by(gradebook_id, 
+             user_id) %>% 
+    filter(date_sync == max(date_sync)) %>% 
+    select(-date_sync)
   
   cat("Get Illuminate Sections Table")
   illuminate_sec <- get_illuminate("sections",
@@ -613,7 +621,6 @@ function(res){
   
   cat("Find current SY quarter terms")
   current_q_dates <- terms %>%
-    select(-schoolid) %>%
     filter(grepl("Q", abbreviation)) %>%
     mutate(q_number = stringr::str_extract(abbreviation, "\\d")) %>%
     group_by(q_number, 
@@ -715,11 +722,7 @@ cat("Filter max calculated_at day/time")
               by = "student_number") %>%
     left_join(cc_unique,
               by = c("ps_sec_id" = "sectionid")) %>%
-    filter(!ill_sec_id %in% c(4379, #4th Attendance
-                              4501, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
-                              4496, #4th PE (all 4 sections in 1 gradebook, dupes not needed)
-                              4502),  #4th PE (all 4 sections in 1 gradebook, dupes not needed)
-           !is_deleted)
+    filter(!is_deleted)
   
   cat("Identify previous and current classes")
   students_sections <- students %>%
@@ -765,7 +768,7 @@ cat("Filter max calculated_at day/time")
            dateleft = if_else(is.na(dateleft) & dna, dna_exitdate, dateleft),
            q_current = identify_quarter(timeframe_end_date),
            dateleft = as_date(dateleft),
-           transfer = dateleft < last_school_day$lastday + days(1), #adding 1 day because Chris' has classes ending on 6/15 but enrollment ends 6/14
+           transfer = dateleft < last_school_day$lastday + days(1), #adding 1 day because enrollment != SY last day of school
            q_transfer = if_else(transfer, identify_quarter(dateleft), 0))
   
   cat("Homeroom table for shiny selection filter")
