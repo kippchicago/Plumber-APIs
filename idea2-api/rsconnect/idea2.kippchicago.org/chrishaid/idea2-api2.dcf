@@ -1,0 +1,13 @@
+name: idea2-api2
+title: idea2-api
+username: chrishaid
+account: chrishaid
+server: idea2.kippchicago.org
+hostUrl: https://idea2.kippchicago.org/__api__
+appId: 66
+bundleId: 330
+url: https://idea2.kippchicago.org/content/66/
+when: 1575648197.39651
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: plumber (Chriss-MacBook-Pro.local's conflicted copy 2019-09-24).R

@@ -27,7 +27,7 @@ bq_project <- Sys.getenv("BQ_PROJECT")
 
 cat(sprintf("BQ_AUTH_FILE is %s", bq_auth_file))
 
-bigrquery::set_service_token(bq_auth_file)
+bigrquery::bq_auth(path = bq_auth_file)
 
 first_day <- Sys.getenv("FIRST_DAY") 
 
@@ -165,6 +165,7 @@ function(res){
   
   cat("Calculate current students tested")
   current_map_term <- map_mv_15$cdf %>%
+    as.data.frame() %>%
     ungroup() %>%
     filter(teststartdate == max(teststartdate)) %>%
     select(termname) %>%
@@ -683,7 +684,7 @@ function(res){
     collect(n= Inf) 
   
   
-  cat("Filter max calculated_at day/time")
+cat("Filter max calculated_at day/time")
   overall_grades_recent <- overall_grades %>%
     group_by(gradebook_id,
              student_id,
